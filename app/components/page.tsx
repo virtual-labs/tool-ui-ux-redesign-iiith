@@ -1,7 +1,8 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+'use client';
+
 import { MousePointer, Square, Navigation, BarChart3, MessageSquare, Layout, ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { designSystem } from "@/lib/design-system"
+import { DSButton, DSCard, DSBadge, DSHeading1, DSHeading2, DSHeading3, DSParagraph, DSCode } from "@/components/design-system"
 
 export default function ComponentsPage() {
   const componentCategories = [
@@ -12,6 +13,7 @@ export default function ComponentsPage() {
       href: "/components/buttons",
       count: 8,
       status: "Stable",
+      gradient: "linear-gradient(135deg, #3182ce, #4299e1)",
     },
     {
       title: "Forms",
@@ -20,6 +22,7 @@ export default function ComponentsPage() {
       href: "/components/forms",
       count: 12,
       status: "Stable",
+      gradient: "linear-gradient(135deg, #10b981, #48bb78)",
     },
     {
       title: "Navigation",
@@ -28,6 +31,7 @@ export default function ComponentsPage() {
       href: "/components/navigation",
       count: 6,
       status: "Stable",
+      gradient: "linear-gradient(135deg, #8b5cf6, #a855f7)",
     },
     {
       title: "Data Display",
@@ -36,6 +40,7 @@ export default function ComponentsPage() {
       href: "/components/data-display",
       count: 10,
       status: "Beta",
+      gradient: "linear-gradient(135deg, #f59e0b, #ed8936)",
     },
     {
       title: "Feedback",
@@ -44,6 +49,7 @@ export default function ComponentsPage() {
       href: "/components/feedback",
       count: 7,
       status: "Stable",
+      gradient: "linear-gradient(135deg, #ef4444, #f87171)",
     },
     {
       title: "Layout",
@@ -52,134 +58,308 @@ export default function ComponentsPage() {
       href: "/components/layout",
       count: 5,
       status: "Stable",
+      gradient: "linear-gradient(135deg, #06b6d4, #67e8f9)",
     },
   ]
 
+  const pageStyle: React.CSSProperties = {
+    minHeight: '100vh',
+    background: designSystem.colors.background.gradient,
+    fontFamily: designSystem.typography.fontFamily.primary,
+  };
+
+  const containerStyle: React.CSSProperties = {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: designSystem.layout.spacing.xl,
+  };
+
+  const heroStyle: React.CSSProperties = {
+    textAlign: 'center',
+    marginBottom: designSystem.layout.spacing.xxl,
+    color: 'white',
+  };
+
+  const mainHeadingStyle: React.CSSProperties = {
+    fontSize: '3.5rem',
+    fontWeight: designSystem.typography.fontWeight.headers,
+    background: 'linear-gradient(135deg, #ffffff, #e2e8f0)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    marginBottom: designSystem.layout.spacing.lg,
+    lineHeight: '1.1',
+  };
+
+  const subtitleStyle: React.CSSProperties = {
+    fontSize: '1.25rem',
+    color: 'rgba(255, 255, 255, 0.9)',
+    maxWidth: '600px',
+    margin: '0 auto',
+    lineHeight: '1.6',
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">Components</h1>
-          <p className="text-xl text-muted-foreground mb-6">
+    <div style={pageStyle}>
+      <div style={containerStyle}>
+        {/* Hero Section */}
+        <div style={heroStyle}>
+          <DSBadge style={{
+            background: 'rgba(255, 255, 255, 0.2)',
+            color: 'white',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            backdropFilter: 'blur(10px)',
+            fontSize: '0.9rem',
+            padding: `${designSystem.layout.spacing.sm} ${designSystem.layout.spacing.md}`,
+            marginBottom: designSystem.layout.spacing.lg,
+          }}>
+            🧩 Component Library
+          </DSBadge>
+          <h1 style={mainHeadingStyle}>Components</h1>
+          <p style={subtitleStyle}>
             Production-ready components built for Virtual Labs experiences. Copy and paste into your projects.
           </p>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-primary">48</div>
-              <div className="text-sm text-muted-foreground">Components</div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-green-600">42</div>
-              <div className="text-sm text-muted-foreground">Stable</div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-yellow-600">6</div>
-              <div className="text-sm text-muted-foreground">Beta</div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-blue-600">100%</div>
-              <div className="text-sm text-muted-foreground">Accessible</div>
-            </CardContent>
-          </Card>
-        </div>
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(20px)',
+          borderRadius: designSystem.borderRadius.cards,
+          padding: designSystem.layout.spacing.xl,
+          marginBottom: designSystem.layout.spacing.xl,
+          boxShadow: designSystem.elevation.level3,
+        }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: designSystem.layout.spacing.lg,
+            marginBottom: designSystem.layout.spacing.xl,
+          }}>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #3182ce, #4299e1)',
+              color: 'white',
+              border: 'none',
+              textAlign: 'center',
+            }}>
+              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>48</div>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Components</div>
+            </DSCard>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #10b981, #48bb78)',
+              color: 'white',
+              border: 'none',
+              textAlign: 'center',
+            }}>
+              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>42</div>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Stable</div>
+            </DSCard>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #f59e0b, #ed8936)',
+              color: 'white',
+              border: 'none',
+              textAlign: 'center',
+            }}>
+              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>6</div>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Beta</div>
+            </DSCard>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #8b5cf6, #a855f7)',
+              color: 'white',
+              border: 'none',
+              textAlign: 'center',
+            }}>
+              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>100%</div>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Accessible</div>
+            </DSCard>
+          </div>
 
-        {/* Component Categories */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {componentCategories.map((category) => (
-            <Link key={category.href} href={category.href}>
-              <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer group">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <category.icon className="h-8 w-8 text-primary" />
-                    <Badge variant={category.status === "Beta" ? "secondary" : "default"}>{category.status}</Badge>
-                  </div>
-                  <CardTitle className="group-hover:text-primary transition-colors">{category.title}</CardTitle>
-                  <CardDescription>{category.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">{category.count} components</span>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+          {/* Component Categories */}
+          <DSHeading2 style={{
+            fontSize: '2.25rem',
+            textAlign: 'center',
+            background: designSystem.colors.background.gradient,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            marginBottom: designSystem.layout.spacing.xl,
+            fontWeight: designSystem.typography.fontWeight.headers,
+          }}>
+            📦 Component Categories
+          </DSHeading2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: designSystem.layout.spacing.lg,
+          }}>
+            {componentCategories.map((category) => (
+              <DSCard key={category.href} interactive style={{
+                background: category.gradient,
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: designSystem.layout.spacing.md }}>
+                  <category.icon style={{ width: '32px', height: '32px', color: 'white' }} />
+                  <DSBadge style={{
+                    background: category.status === "Beta" ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.2)',
+                    color: 'white',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    fontSize: '0.8rem',
+                  }}>
+                    {category.status}
+                  </DSBadge>
+                </div>
+                <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.sm }}>
+                  {category.title}
+                </DSHeading3>
+                <DSParagraph style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontSize: '0.95rem',
+                  marginBottom: designSystem.layout.spacing.md,
+                  lineHeight: '1.5',
+                }}>
+                  {category.description}
+                </DSParagraph>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ fontSize: '0.9rem', opacity: 0.9 }}>{category.count} components</span>
+                  <ArrowRight style={{ width: '16px', height: '16px', opacity: 0.9 }} />
+                </div>
+              </DSCard>
+            ))}
+          </div>
         </div>
 
         {/* Getting Started */}
-        <div className="space-y-8">
-          <h2 className="text-2xl font-bold">Getting Started</h2>
+        <div style={{
+          background: 'white',
+          borderRadius: designSystem.borderRadius.cards,
+          padding: designSystem.layout.spacing.xl,
+          boxShadow: designSystem.elevation.level3,
+        }}>
+          <DSHeading2 style={{
+            fontSize: '2.25rem',
+            textAlign: 'center',
+            background: designSystem.colors.background.gradient,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            marginBottom: designSystem.layout.spacing.xl,
+            fontWeight: designSystem.typography.fontWeight.headers,
+          }}>
+            🚀 Getting Started
+          </DSHeading2>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Installation</CardTitle>
-                <CardDescription>Add components to your project</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="bg-muted p-4 rounded-lg">
-                  <code className="text-sm">npm install @virtual-labs/ui</code>
-                </div>
-                <p className="text-sm text-muted-foreground">Or copy individual components from the documentation.</p>
-              </CardContent>
-            </Card>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+            gap: designSystem.layout.spacing.lg,
+            marginBottom: designSystem.layout.spacing.xl,
+          }}>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #667eea, #764ba2)',
+              color: 'white',
+              border: 'none',
+            }}>
+              <DSHeading3 style={{ color: 'white', fontSize: '1.5rem', marginBottom: designSystem.layout.spacing.md }}>
+                📦 Installation
+              </DSHeading3>
+              <DSParagraph style={{
+                color: 'rgba(255, 255, 255, 0.9)',
+                marginBottom: designSystem.layout.spacing.lg,
+                lineHeight: '1.6',
+              }}>
+                Add components to your project
+              </DSParagraph>
+              <div style={{
+                background: 'rgba(0, 0, 0, 0.3)',
+                padding: designSystem.layout.spacing.md,
+                borderRadius: designSystem.borderRadius.components,
+                marginBottom: designSystem.layout.spacing.md,
+                fontFamily: designSystem.typography.fontFamily.mono,
+                fontSize: '0.9rem',
+              }}>
+                pnpm install @virtual-labs/ui
+              </div>
+              <DSParagraph style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '0.9rem',
+              }}>
+                Or copy individual components from the documentation.
+              </DSParagraph>
+            </DSCard>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Usage</CardTitle>
-                <CardDescription>Import and use components in your React app</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="bg-muted p-4 rounded-lg">
-                  <code className="text-sm">
-                    {`import { Button } from '@virtual-labs/ui'
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #10b981, #48bb78)',
+              color: 'white',
+              border: 'none',
+            }}>
+              <DSHeading3 style={{ color: 'white', fontSize: '1.5rem', marginBottom: designSystem.layout.spacing.md }}>
+                🧩 Usage
+              </DSHeading3>
+              <DSParagraph style={{
+                color: 'rgba(255, 255, 255, 0.9)',
+                marginBottom: designSystem.layout.spacing.lg,
+                lineHeight: '1.6',
+              }}>
+                Import and use components in your React app
+              </DSParagraph>
+              <div style={{
+                background: 'rgba(0, 0, 0, 0.3)',
+                padding: designSystem.layout.spacing.md,
+                borderRadius: designSystem.borderRadius.components,
+                fontFamily: designSystem.typography.fontFamily.mono,
+                fontSize: '0.85rem',
+                lineHeight: '1.4',
+              }}>
+                {`import { Button } from '@virtual-labs/ui'
 
 <Button variant="primary">
   Start Experiment
 </Button>`}
-                  </code>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </DSCard>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Component Anatomy</CardTitle>
-              <CardDescription>Each component includes comprehensive documentation</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-4 gap-4 text-sm">
-                <div className="space-y-2">
-                  <div className="font-medium">Usage Guidelines</div>
-                  <div className="text-muted-foreground">When and how to use</div>
-                </div>
-                <div className="space-y-2">
-                  <div className="font-medium">API Reference</div>
-                  <div className="text-muted-foreground">Props and variants</div>
-                </div>
-                <div className="space-y-2">
-                  <div className="font-medium">Code Examples</div>
-                  <div className="text-muted-foreground">Copy-paste ready</div>
-                </div>
-                <div className="space-y-2">
-                  <div className="font-medium">Accessibility</div>
-                  <div className="text-muted-foreground">WCAG compliance</div>
-                </div>
+          <DSCard style={{
+            background: 'linear-gradient(135deg, #f59e0b, #ed8936)',
+            color: 'white',
+            border: 'none',
+          }}>
+            <DSHeading3 style={{ color: 'white', fontSize: '1.5rem', marginBottom: designSystem.layout.spacing.md }}>
+              📋 Component Anatomy
+            </DSHeading3>
+            <DSParagraph style={{
+              color: 'rgba(255, 255, 255, 0.9)',
+              marginBottom: designSystem.layout.spacing.lg,
+              lineHeight: '1.6',
+            }}>
+              Each component includes comprehensive documentation
+            </DSParagraph>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: designSystem.layout.spacing.lg,
+            }}>
+              <div>
+                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>Usage Guidelines</div>
+                <div style={{ opacity: 0.9, fontSize: '0.9rem' }}>When and how to use</div>
               </div>
-            </CardContent>
-          </Card>
+              <div>
+                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>API Reference</div>
+                <div style={{ opacity: 0.9, fontSize: '0.9rem' }}>Props and variants</div>
+              </div>
+              <div>
+                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>Code Examples</div>
+                <div style={{ opacity: 0.9, fontSize: '0.9rem' }}>Copy-paste ready</div>
+              </div>
+              <div>
+                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>Accessibility</div>
+                <div style={{ opacity: 0.9, fontSize: '0.9rem' }}>WCAG compliance</div>
+              </div>
+            </div>
+          </DSCard>
         </div>
       </div>
     </div>

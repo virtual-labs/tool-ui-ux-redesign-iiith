@@ -1,20 +1,54 @@
 import * as React from "react"
-
 import { cn } from "@/lib/utils"
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
-    {...props}
-  />
-))
+// Design system imports (only used in client components)
+let commonStyles: any;
+let useCardHover: any;
+
+// Dynamic imports for client-side only
+if (typeof window !== 'undefined') {
+  commonStyles = require("@/lib/design-system").commonStyles;
+  useCardHover = require("@/lib/design-hooks").useCardHover;
+}
+
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  useDesignSystem?: boolean
+  interactive?: boolean
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, useDesignSystem = false, interactive = false, style: customStyle, ...props }, ref) => {
+    // Only use design system features on client side
+    if (useDesignSystem && typeof window !== 'undefined' && commonStyles && useCardHover) {
+      const baseStyle = interactive 
+        ? { ...commonStyles.card.interactive, ...customStyle }
+        : { ...commonStyles.card.default, ...customStyle };
+      const { style, onMouseEnter, onMouseLeave } = useCardHover(baseStyle);
+      
+      return (
+        <div
+          ref={ref}
+          style={style}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          {...props}
+        />
+      );
+    }
+    
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "rounded-lg border bg-card text-card-foreground shadow-sm",
+          className
+        )}
+        style={customStyle}
+        {...props}
+      />
+    );
+  }
+)
 Card.displayName = "Card"
 
 const CardHeader = React.forwardRef<

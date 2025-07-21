@@ -1,8 +1,19 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-
 import { cn } from "@/lib/utils"
+
+// Design system imports (only used in client components)
+let designSystem: any;
+let commonStyles: any;
+let useButtonHover: any;
+
+// Dynamic imports for client-side only
+if (typeof window !== 'undefined') {
+  designSystem = require("@/lib/design-system").designSystem;
+  commonStyles = require("@/lib/design-system").commonStyles;
+  useButtonHover = require("@/lib/design-hooks").useButtonHover;
+}
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -37,14 +48,46 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  useDesignSystem?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, useDesignSystem = false, style: customStyle, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    
+    // Use design system styles if requested and on client side
+    if (useDesignSystem && typeof window !== 'undefined' && commonStyles && useButtonHover) {
+      const getDesignSystemVariant = () => {
+        switch (variant) {
+          case 'destructive': return 'error';
+          case 'outline': case 'secondary': return 'secondary';
+          case 'ghost': case 'link': return 'secondary';
+          default: return 'primary';
+        }
+      };
+      
+      const baseStyle = { 
+        ...commonStyles.button[getDesignSystemVariant()], 
+        ...customStyle 
+      };
+      const { style, onMouseEnter, onMouseLeave } = useButtonHover(baseStyle);
+      
+      return (
+        <Comp
+          style={style}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          ref={ref}
+          {...props}
+        />
+      );
+    }
+    
+    // Default Tailwind behavior
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
+        style={customStyle}
         ref={ref}
         {...props}
       />

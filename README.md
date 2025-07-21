@@ -1,30 +1,100 @@
-# Line design guidelines
+# Virtual Labs UI/UX Design System
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A comprehensive design system and style guide for Virtual Labs educational platform, built with Next.js, TypeScript, and Tailwind CSS.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/iiit-virtual-labs-v0s-projects/v0-line-design-guidelines)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/TmR0o96TLMx)
+## 🚀 Overview
 
-## Overview
+This project provides a complete design system documentation site for Virtual Labs, featuring:
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+- **Design Foundations**: Colors, typography, spacing, border radius, elevation
+- **Components**: Reusable UI components with consistent styling
+- **Patterns**: Common interface patterns for virtual laboratory experiences
+- **Guidelines**: Comprehensive guidelines for accessibility, content, implementation, and educational design
 
-## Deployment
+## 🛠️ Tech Stack
 
-Your project is live at:
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI primitives
+- **Icons**: Lucide React
 
-**[https://vercel.com/iiit-virtual-labs-v0s-projects/v0-line-design-guidelines](https://vercel.com/iiit-virtual-labs-v0s-projects/v0-line-design-guidelines)**
+## 📁 Project Structure
 
-## Build your app
+```
+├── app/                    # Next.js app directory
+│   ├── components/         # Component documentation pages
+│   ├── foundations/        # Design foundations pages
+│   ├── guidelines/         # Design guidelines pages
+│   └── patterns/          # Pattern documentation pages
+├── components/            # Reusable React components
+│   ├── design-system/     # Design system components
+│   └── ui/               # Base UI components
+├── lib/                  # Utility functions and design system
+└── public/              # Static assets
+```
 
-Continue building your app on:
+## 🚀 Getting Started
 
-**[https://v0.dev/chat/projects/TmR0o96TLMx](https://v0.dev/chat/projects/TmR0o96TLMx)**
+### Prerequisites
 
-## How It Works
+- Node.js 18+ 
+- pnpm (recommended) or npm/yarn
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Run the development server:
+   ```bash
+   pnpm dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### Available Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+
+## 🎨 Design System Features
+
+### Foundations
+- **Colors**: Primary, secondary, accent palettes with semantic variants
+- **Typography**: Responsive font scales and hierarchy
+- **Spacing**: Consistent spacing system
+- **Elevation**: Shadow and layering system
+
+### Components
+- Buttons (primary, secondary, outline variants)
+- Cards with interactive states
+- Form elements (inputs, selects, checkboxes)
+- Navigation components
+- Data display components
+
+### Guidelines
+- **Accessibility**: WCAG 2.1 AA compliance guidelines
+- **Content**: Voice, tone, and writing standards
+- **Educational**: Pedagogical design principles
+- **Implementation**: Technical guidelines and best practices
+
+## 🤝 Contributing
+
+1. Follow the existing code style and conventions
+2. Ensure all components are accessible (WCAG 2.1 AA)
+3. Test components across different screen sizes
+4. Update documentation when adding new components
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🏫 About Virtual Labs
+
+Virtual Labs is an educational initiative providing remote access to laboratories in various disciplines of science and engineering.

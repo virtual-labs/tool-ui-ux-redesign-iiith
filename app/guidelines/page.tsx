@@ -1,7 +1,9 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+'use client'
+
+import React from 'react'
 import { PenTool, Accessibility, Code, Users, BookOpen, Shield } from "lucide-react"
-import Link from "next/link"
+import { designSystem } from "@/lib/design-system"
+import { DSButton, DSCard, DSBadge, DSHeading2, DSHeading3, DSParagraph } from "@/components/design-system"
 
 export default function GuidelinesPage() {
   const guidelines = [
@@ -11,6 +13,7 @@ export default function GuidelinesPage() {
       icon: PenTool,
       href: "/guidelines/content",
       topics: ["Writing Style", "Scientific Language", "Error Messages", "Help Text"],
+      gradient: "linear-gradient(135deg, #3182ce, #4299e1)",
     },
     {
       title: "Accessibility",
@@ -18,6 +21,7 @@ export default function GuidelinesPage() {
       icon: Accessibility,
       href: "/guidelines/accessibility",
       topics: ["WCAG Compliance", "Screen Readers", "Keyboard Navigation", "Color Contrast"],
+      gradient: "linear-gradient(135deg, #10b981, #48bb78)",
     },
     {
       title: "Implementation",
@@ -25,6 +29,7 @@ export default function GuidelinesPage() {
       icon: Code,
       href: "/guidelines/implementation",
       topics: ["Code Standards", "Performance", "Browser Support", "Testing"],
+      gradient: "linear-gradient(135deg, #8b5cf6, #a855f7)",
     },
     {
       title: "User Research",
@@ -32,6 +37,7 @@ export default function GuidelinesPage() {
       icon: Users,
       href: "/guidelines/research",
       topics: ["Student Testing", "Instructor Feedback", "Learning Analytics", "Usability Studies"],
+      gradient: "linear-gradient(135deg, #f59e0b, #ed8936)",
     },
     {
       title: "Educational Design",
@@ -39,6 +45,7 @@ export default function GuidelinesPage() {
       icon: BookOpen,
       href: "/guidelines/educational",
       topics: ["Learning Objectives", "Scaffolding", "Assessment", "Feedback Loops"],
+      gradient: "linear-gradient(135deg, #ef4444, #f87171)",
     },
     {
       title: "Safety & Ethics",
@@ -46,172 +53,331 @@ export default function GuidelinesPage() {
       icon: Shield,
       href: "/guidelines/safety",
       topics: ["Data Privacy", "Safety Protocols", "Ethical Considerations", "Compliance"],
+      gradient: "linear-gradient(135deg, #06b6d4, #67e8f9)",
     },
   ]
 
+  const pageStyle: React.CSSProperties = {
+    minHeight: '100vh',
+    background: designSystem.colors.background.gradient,
+    fontFamily: designSystem.typography.fontFamily.primary,
+  };
+
+  const containerStyle: React.CSSProperties = {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: designSystem.layout.spacing.xl,
+  };
+
+  const heroStyle: React.CSSProperties = {
+    textAlign: 'center',
+    marginBottom: designSystem.layout.spacing.xxl,
+    color: 'white',
+  };
+
+  const mainHeadingStyle: React.CSSProperties = {
+    fontSize: '3.5rem',
+    fontWeight: designSystem.typography.fontWeight.headers,
+    background: 'linear-gradient(135deg, #ffffff, #e2e8f0)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    marginBottom: designSystem.layout.spacing.lg,
+    lineHeight: '1.1',
+  };
+
+  const subtitleStyle: React.CSSProperties = {
+    fontSize: '1.25rem',
+    color: 'rgba(255, 255, 255, 0.9)',
+    maxWidth: '700px',
+    margin: '0 auto',
+    lineHeight: '1.6',
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">Guidelines</h1>
-          <p className="text-xl text-muted-foreground mb-6">
+    <div style={pageStyle}>
+      <div style={containerStyle}>
+        {/* Hero Section */}
+        <div style={heroStyle}>
+          <DSBadge style={{
+            background: 'rgba(255, 255, 255, 0.2)',
+            color: 'white',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            backdropFilter: 'blur(10px)',
+            fontSize: '0.9rem',
+            padding: `${designSystem.layout.spacing.sm} ${designSystem.layout.spacing.md}`,
+            marginBottom: designSystem.layout.spacing.lg,
+          }}>
+            📋 Design Guidelines
+          </DSBadge>
+          <h1 style={mainHeadingStyle}>Guidelines</h1>
+          <p style={subtitleStyle}>
             Comprehensive guidelines for creating effective, accessible, and educational Virtual Labs experiences.
           </p>
         </div>
 
         {/* Guidelines Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {guidelines.map((guideline) => (
-            <Link key={guideline.href} href={guideline.href}>
-              <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer group">
-                <CardHeader>
-                  <guideline.icon className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="group-hover:text-primary transition-colors">{guideline.title}</CardTitle>
-                  <CardDescription>{guideline.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium">Key Topics:</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {guideline.topics.map((topic) => (
-                        <Badge key={topic} variant="outline" className="text-xs">
-                          {topic}
-                        </Badge>
-                      ))}
-                    </div>
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(20px)',
+          borderRadius: designSystem.borderRadius.cards,
+          padding: designSystem.layout.spacing.xl,
+          marginBottom: designSystem.layout.spacing.xl,
+          boxShadow: designSystem.elevation.level3,
+        }}>
+          <DSHeading2 style={{
+            fontSize: '2.25rem',
+            textAlign: 'center',
+            background: designSystem.colors.background.gradient,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            marginBottom: designSystem.layout.spacing.xl,
+            fontWeight: designSystem.typography.fontWeight.headers,
+          }}>
+            📚 Design Guidelines
+          </DSHeading2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+            gap: designSystem.layout.spacing.lg,
+          }}>
+            {guidelines.map((guideline) => (
+              <DSCard key={guideline.href} interactive style={{
+                background: guideline.gradient,
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+              }}>
+                <guideline.icon style={{ width: '32px', height: '32px', color: 'white', marginBottom: designSystem.layout.spacing.md }} />
+                <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.sm }}>
+                  {guideline.title}
+                </DSHeading3>
+                <DSParagraph style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontSize: '0.95rem',
+                  marginBottom: designSystem.layout.spacing.md,
+                  lineHeight: '1.5',
+                }}>
+                  {guideline.description}
+                </DSParagraph>
+                <div style={{ marginBottom: designSystem.layout.spacing.sm }}>
+                  <div style={{ fontSize: '0.9rem', fontWeight: 'bold', marginBottom: designSystem.layout.spacing.xs }}>Key Topics:</div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: designSystem.layout.spacing.xs }}>
+                    {guideline.topics.map((topic) => (
+                      <DSBadge key={topic} style={{
+                        background: 'rgba(255, 255, 255, 0.2)',
+                        color: 'white',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        fontSize: '0.75rem',
+                        padding: `${designSystem.layout.spacing.xs} ${designSystem.layout.spacing.sm}`,
+                      }}>
+                        {topic}
+                      </DSBadge>
+                    ))}
                   </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+                </div>
+              </DSCard>
+            ))}
+          </div>
         </div>
 
         {/* Core Principles */}
-        <div className="space-y-8">
-          <h2 className="text-2xl font-bold">Core Principles</h2>
+        <div style={{
+          background: 'white',
+          borderRadius: designSystem.borderRadius.cards,
+          padding: designSystem.layout.spacing.xl,
+          boxShadow: designSystem.elevation.level3,
+        }}>
+          <DSHeading2 style={{
+            fontSize: '2.25rem',
+            textAlign: 'center',
+            background: designSystem.colors.background.gradient,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            marginBottom: designSystem.layout.spacing.xl,
+            fontWeight: designSystem.typography.fontWeight.headers,
+          }}>
+            🎯 Core Principles
+          </DSHeading2>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Education-First Design</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <p className="text-sm text-muted-foreground">
-                  Every design decision should support learning objectives and enhance the educational experience.
-                </p>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Clear learning pathways</li>
-                  <li>• Immediate feedback mechanisms</li>
-                  <li>• Progressive skill building</li>
-                  <li>• Authentic scientific practices</li>
-                </ul>
-              </CardContent>
-            </Card>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: designSystem.layout.spacing.lg,
+            marginBottom: designSystem.layout.spacing.xl,
+          }}>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #667eea, #764ba2)',
+              color: 'white',
+              border: 'none',
+            }}>
+              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.md }}>
+                🎓 Education-First Design
+              </DSHeading3>
+              <DSParagraph style={{
+                color: 'rgba(255, 255, 255, 0.9)',
+                lineHeight: '1.6',
+                marginBottom: designSystem.layout.spacing.md,
+              }}>
+                Every design decision should support learning objectives and enhance the educational experience.
+              </DSParagraph>
+              <ul style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '0.9rem',
+                lineHeight: '1.5',
+                paddingLeft: designSystem.layout.spacing.md,
+              }}>
+                <li>Prioritize learning goals over aesthetic preferences</li>
+                <li>Design for different learning styles and abilities</li>
+                <li>Support both guided and exploratory learning</li>
+              </ul>
+            </DSCard>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Inclusive by Default</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <p className="text-sm text-muted-foreground">
-                  Design for diverse learners with varying abilities, backgrounds, and technical access.
-                </p>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Multiple input methods</li>
-                  <li>• Flexible pacing options</li>
-                  <li>• Alternative content formats</li>
-                  <li>• Cultural sensitivity</li>
-                </ul>
-              </CardContent>
-            </Card>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #10b981, #48bb78)',
+              color: 'white',
+              border: 'none',
+            }}>
+              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.md }}>
+                ♿ Universal Access
+              </DSHeading3>
+              <DSParagraph style={{
+                color: 'rgba(255, 255, 255, 0.9)',
+                lineHeight: '1.6',
+                marginBottom: designSystem.layout.spacing.md,
+              }}>
+                Design experiences that are accessible to users with diverse abilities and technical setups.
+              </DSParagraph>
+              <ul style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '0.9rem',
+                lineHeight: '1.5',
+                paddingLeft: designSystem.layout.spacing.md,
+              }}>
+                <li>Meet WCAG 2.1 AA standards</li>
+                <li>Support keyboard navigation</li>
+                <li>Provide alternative text and descriptions</li>
+              </ul>
+            </DSCard>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Scientific Authenticity</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <p className="text-sm text-muted-foreground">
-                  Virtual labs should accurately represent real scientific processes and methodologies.
-                </p>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Realistic equipment behavior</li>
-                  <li>• Accurate data relationships</li>
-                  <li>• Proper safety protocols</li>
-                  <li>• Scientific method integration</li>
-                </ul>
-              </CardContent>
-            </Card>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #f59e0b, #ed8936)',
+              color: 'white',
+              border: 'none',
+            }}>
+              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.md }}>
+                🔬 Scientific Rigor
+              </DSHeading3>
+              <DSParagraph style={{
+                color: 'rgba(255, 255, 255, 0.9)',
+                lineHeight: '1.6',
+                marginBottom: designSystem.layout.spacing.md,
+              }}>
+                Maintain accuracy and authenticity in representing scientific concepts and procedures.
+              </DSParagraph>
+              <ul style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '0.9rem',
+                lineHeight: '1.5',
+                paddingLeft: designSystem.layout.spacing.md,
+              }}>
+                <li>Validate content with subject matter experts</li>
+                <li>Use appropriate scientific terminology</li>
+                <li>Represent real-world constraints accurately</li>
+              </ul>
+            </DSCard>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Iterative Improvement</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <p className="text-sm text-muted-foreground">
-                  Continuously improve based on user feedback, learning analytics, and educational research.
-                </p>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Regular user testing</li>
-                  <li>• Data-driven decisions</li>
-                  <li>• Educator collaboration</li>
-                  <li>• Student outcome tracking</li>
-                </ul>
-              </CardContent>
-            </Card>
+            <DSCard style={{
+              background: 'linear-gradient(135deg, #8b5cf6, #a855f7)',
+              color: 'white',
+              border: 'none',
+            }}>
+              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.md }}>
+                🚀 Progressive Enhancement
+              </DSHeading3>
+              <DSParagraph style={{
+                color: 'rgba(255, 255, 255, 0.9)',
+                lineHeight: '1.6',
+                marginBottom: designSystem.layout.spacing.md,
+              }}>
+                Build core functionality that works everywhere, then enhance for capable devices.
+              </DSParagraph>
+              <ul style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '0.9rem',
+                lineHeight: '1.5',
+                paddingLeft: designSystem.layout.spacing.md,
+              }}>
+                <li>Start with basic HTML and CSS</li>
+                <li>Layer on JavaScript enhancements</li>
+                <li>Optimize for various connection speeds</li>
+              </ul>
+            </DSCard>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Implementation Checklist</CardTitle>
-              <CardDescription>Essential considerations when implementing Virtual Labs designs</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <h4 className="font-medium">Before Development</h4>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      Define clear learning objectives
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      Identify target user groups
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      Plan accessibility requirements
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      Review content guidelines
-                    </li>
-                  </ul>
-                </div>
-                <div className="space-y-4">
-                  <h4 className="font-medium">During Development</h4>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      Follow component specifications
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      Test with assistive technologies
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      Validate educational effectiveness
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      Ensure cross-platform compatibility
-                    </li>
-                  </ul>
-                </div>
+          {/* Implementation Checklist */}
+          <DSCard style={{
+            background: 'linear-gradient(135deg, #ef4444, #f87171)',
+            color: 'white',
+            border: 'none',
+          }}>
+            <DSHeading3 style={{ color: 'white', fontSize: '1.5rem', marginBottom: designSystem.layout.spacing.md }}>
+              ✅ Implementation Checklist
+            </DSHeading3>
+            <DSParagraph style={{
+              color: 'rgba(255, 255, 255, 0.9)',
+              marginBottom: designSystem.layout.spacing.lg,
+              lineHeight: '1.6',
+            }}>
+              Essential steps for implementing guidelines in your Virtual Labs project
+            </DSParagraph>
+            
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: designSystem.layout.spacing.lg,
+            }}>
+              <div>
+                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>📋 Planning Phase</div>
+                <ul style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5', paddingLeft: designSystem.layout.spacing.md }}>
+                  <li>Define learning objectives</li>
+                  <li>Identify target users and contexts</li>
+                  <li>Establish content requirements</li>
+                  <li>Plan accessibility features</li>
+                </ul>
               </div>
-            </CardContent>
-          </Card>
+              <div>
+                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>🎨 Design Phase</div>
+                <ul style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5', paddingLeft: designSystem.layout.spacing.md }}>
+                  <li>Apply design system components</li>
+                  <li>Create user flow diagrams</li>
+                  <li>Design responsive layouts</li>
+                  <li>Plan content hierarchy</li>
+                </ul>
+              </div>
+              <div>
+                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>💻 Development Phase</div>
+                <ul style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5', paddingLeft: designSystem.layout.spacing.md }}>
+                  <li>Follow coding standards</li>
+                  <li>Implement accessibility features</li>
+                  <li>Optimize performance</li>
+                  <li>Test across devices</li>
+                </ul>
+              </div>
+              <div>
+                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>🔍 Testing Phase</div>
+                <ul style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5', paddingLeft: designSystem.layout.spacing.md }}>
+                  <li>Conduct usability testing</li>
+                  <li>Validate with educators</li>
+                  <li>Test accessibility compliance</li>
+                  <li>Gather user feedback</li>
+                </ul>
+              </div>
+            </div>
+          </DSCard>
         </div>
       </div>
     </div>
