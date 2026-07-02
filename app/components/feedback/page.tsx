@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { DSModal, DSButton } from "@/components/design-system"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -26,6 +27,7 @@ export default function FeedbackPage() {
   const [copiedCode, setCopiedCode] = useState<string | null>(null)
   const [showToast, setShowToast] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const copyCode = (code: string) => {
     navigator.clipboard.writeText(code)
@@ -53,6 +55,7 @@ export default function FeedbackPage() {
           <TabsList>
             <TabsTrigger value="alerts">Alerts</TabsTrigger>
             <TabsTrigger value="toasts">Toasts</TabsTrigger>
+            <TabsTrigger value="modals">Modals</TabsTrigger>
             <TabsTrigger value="status">Status</TabsTrigger>
             <TabsTrigger value="loading">Loading</TabsTrigger>
           </TabsList>
@@ -595,6 +598,83 @@ export default function FeedbackPage() {
                     <Button variant="outline">Find Alternative</Button>
                     <Button>Join Queue</Button>
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="modals" className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Validation & Action Modals (DSModal)</CardTitle>
+                <CardDescription>Overlays and popups trapping focus for critical confirmations or instruction prompts</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <DSButton variant="primary" onClick={() => setIsModalOpen(true)}>
+                    Trigger Reset Confirmation
+                  </DSButton>
+                </div>
+
+                <DSModal
+                  isOpen={isModalOpen}
+                  onClose={() => setIsModalOpen(false)}
+                  title="Reset Lab Simulation"
+                  footer={
+                    <>
+                      <DSButton variant="secondary" onClick={() => setIsModalOpen(false)}>
+                        Cancel
+                      </DSButton>
+                      <DSButton variant="error" onClick={() => { setIsModalOpen(false); }}>
+                        Confirm Reset
+                      </DSButton>
+                    </>
+                  }
+                >
+                  <p className="mb-4">
+                    Are you sure you want to reset the current titration experiment? 
+                    All unexported measurements and graph plot points will be permanently cleared. This action cannot be undone.
+                  </p>
+                </DSModal>
+
+                <div className="bg-muted p-4 rounded-lg relative">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="absolute top-2 right-2"
+                    onClick={() =>
+                      copyCode(`<DSModal
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Reset Lab Simulation"
+  footer={
+    <>
+      <DSButton variant="secondary" onClick={() => setIsOpen(false)}>Cancel</DSButton>
+      <DSButton variant="error">Confirm Reset</DSButton>
+    </>
+  }
+>
+  <p>Are you sure you want to reset the current titration experiment?</p>
+</DSModal>`)
+                    }
+                  >
+                    {copiedCode ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  </Button>
+                  <pre className="text-sm">
+                    <code>{`<DSModal
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Reset Lab Simulation"
+  footer={
+    <>
+      <DSButton variant="secondary" onClick={() => setIsOpen(false)}>Cancel</DSButton>
+      <DSButton variant="error">Confirm Reset</DSButton>
+    </>
+  }
+>
+  <p>Are you sure you want to reset the current titration experiment?</p>
+</DSModal>`}</code>
+                  </pre>
                 </div>
               </CardContent>
             </Card>

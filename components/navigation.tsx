@@ -51,47 +51,55 @@ export function Navigation() {
   const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Flask className="h-6 w-6" />
-            <span className="hidden font-bold sm:inline-block">Virtual Labs DS</span>
+    <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md">
+      <div className="container mx-auto px-6 flex h-16 items-center justify-between">
+        <div className="flex items-center space-x-8">
+          <Link href="/" className="flex items-center space-x-2.5">
+            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-500/10">
+              <Flask className="h-4.5 w-4.5 text-white" />
+            </div>
+            <span className="font-bold text-slate-900 tracking-tight text-base">Virtual Labs DS</span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "transition-colors hover:text-foreground/80",
-                  pathname?.startsWith(item.href) ? "text-foreground" : "text-foreground/60",
-                )}
-              >
-                {item.title}
-              </Link>
-            ))}
+          
+          <nav className="hidden md:flex items-center space-x-6 text-sm font-semibold">
+            {navigation.map((item) => {
+              const isActive = pathname?.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "transition-colors py-1 hover:text-slate-900",
+                    isActive ? "text-blue-600 border-b-2 border-blue-600" : "text-slate-500"
+                  )}
+                >
+                  {item.title}
+                </Link>
+              );
+            })}
           </nav>
         </div>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle Menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="pr-0">
-            <MobileNav />
-          </SheetContent>
-        </Sheet>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            <Button variant="ghost" size="sm" asChild>
+
+        <div className="flex items-center space-x-4">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                className="px-2 text-base hover:bg-slate-50 md:hidden"
+              >
+                <Menu className="h-5 w-5 text-slate-700" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="pr-0 bg-white border-r border-slate-100">
+              <MobileNav />
+            </SheetContent>
+          </Sheet>
+          
+          <div className="flex items-center">
+            <Button variant="ghost" size="sm" asChild className="hover:bg-slate-50 hover:text-slate-900 text-slate-500">
               <Link href="https://github.com/virtual-labs/design-system">
-                <Github className="h-4 w-4" />
+                <Github className="h-4.5 w-4.5" />
                 <span className="sr-only">GitHub</span>
               </Link>
             </Button>
