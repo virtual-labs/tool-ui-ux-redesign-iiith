@@ -1,10 +1,11 @@
+import { PageContainer } from "@/components/page-container"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 export default function LayoutPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-6xl mx-auto">
+    <PageContainer>
+      <div className="space-y-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">Layout Grid</h1>
           <p className="text-xl text-muted-foreground mb-6">
@@ -288,6 +289,6 @@ export default function LayoutPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </PageContainer>
   )
 }

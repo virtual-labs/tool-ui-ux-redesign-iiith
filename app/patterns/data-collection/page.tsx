@@ -1,5 +1,6 @@
 "use client"
 
+import { PageContainer } from "@/components/page-container"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -24,7 +25,8 @@ import {
 
 export default function DataCollectionPage() {
   return (
-    <div className="space-y-8">
+    <PageContainer>
+      <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4">Data Collection Patterns</h1>
         <p className="text-xl text-muted-foreground mb-6">
@@ -576,5 +578,6 @@ export default function DataCollectionPage() {
         </TabsContent>
       </Tabs>
     </div>
+    </PageContainer>
   )
 }

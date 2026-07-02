@@ -15,6 +15,8 @@ const navigation = [
       { title: "Typography", href: "/foundations/typography" },
       { title: "Spacing", href: "/foundations/spacing" },
       { title: "Layout", href: "/foundations/layout" },
+      { title: "Border Radius", href: "/foundations/border-radius" },
+      { title: "Elevation", href: "/foundations/elevation" },
     ],
   },
   {
@@ -25,6 +27,8 @@ const navigation = [
       { title: "Forms", href: "/components/forms" },
       { title: "Navigation", href: "/components/navigation" },
       { title: "Data Display", href: "/components/data-display" },
+      { title: "Feedback", href: "/components/feedback" },
+      { title: "Layout", href: "/components/layout" },
     ],
   },
   {
@@ -32,8 +36,11 @@ const navigation = [
     href: "/patterns",
     items: [
       { title: "Lab Interface", href: "/patterns/lab-interface" },
-      { title: "Data Visualization", href: "/patterns/data-viz" },
+      { title: "Data Visualization", href: "/patterns/data-visualization" },
       { title: "Experiment Flow", href: "/patterns/experiment-flow" },
+      { title: "Data Collection", href: "/patterns/data-collection" },
+      { title: "Monitoring Dashboard", href: "/patterns/monitoring-dashboard" },
+      { title: "Collaborative Lab", href: "/patterns/collaborative-lab" },
     ],
   },
   {
@@ -43,6 +50,9 @@ const navigation = [
       { title: "Content Design", href: "/guidelines/content" },
       { title: "Accessibility", href: "/guidelines/accessibility" },
       { title: "Implementation", href: "/guidelines/implementation" },
+      { title: "Research", href: "/guidelines/research" },
+      { title: "Educational", href: "/guidelines/educational" },
+      { title: "Safety & Ethics", href: "/guidelines/safety" },
     ],
   },
 ]
@@ -55,8 +65,8 @@ export function Navigation() {
       <div className="container mx-auto px-6 flex h-16 items-center justify-between">
         <div className="flex items-center space-x-8">
           <Link href="/" className="flex items-center space-x-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-500/10">
-              <Flask className="h-4.5 w-4.5 text-white" />
+            <div className="w-8 h-8 rounded-lg bg-blue-700 flex items-center justify-center shadow-sm shadow-blue-500/10">
+              <Flask className="h-4 w-4 text-white" />
             </div>
             <span className="font-bold text-slate-900 tracking-tight text-base">Virtual Labs DS</span>
           </Link>
@@ -98,8 +108,8 @@ export function Navigation() {
           
           <div className="flex items-center">
             <Button variant="ghost" size="sm" asChild className="hover:bg-slate-50 hover:text-slate-900 text-slate-500">
-              <Link href="https://github.com/virtual-labs/design-system">
-                <Github className="h-4.5 w-4.5" />
+              <Link href="https://github.com/virtual-labs/tool-ui-ux-redesign-iiith">
+                <Github className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
               </Link>
             </Button>
@@ -122,7 +132,11 @@ function MobileNav() {
           <div key={item.href} className="flex flex-col space-y-3 pt-6">
             <h4 className="font-medium">{item.title}</h4>
             {item.items?.map((subItem) => (
-              <Link key={subItem.href} href={subItem.href} className="text-muted-foreground">
+              <Link
+                key={subItem.href}
+                href={subItem.href}
+                className="pl-2 text-sm text-slate-500 transition-colors hover:text-blue-600"
+              >
                 {subItem.title}
               </Link>
             ))}

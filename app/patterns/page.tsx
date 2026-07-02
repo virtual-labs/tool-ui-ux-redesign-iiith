@@ -14,7 +14,7 @@ export default function PatternsPage() {
       href: "/patterns/lab-interface",
       status: "Stable",
       examples: ["Chemistry Lab", "Physics Simulator", "Biology Microscope"],
-      gradient: "linear-gradient(135deg, #3182ce, #4299e1)",
+      gradient: "linear-gradient(135deg, #1d4ed8, #3b82f6)",
     },
     {
       title: "Data Visualization",

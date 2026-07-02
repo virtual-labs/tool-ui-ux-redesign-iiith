@@ -14,7 +14,7 @@ export default function GuidelinesPage() {
       icon: PenTool,
       href: "/guidelines/content",
       topics: ["Writing Style", "Scientific Language", "Error Messages", "Help Text"],
-      gradient: "linear-gradient(135deg, #3182ce, #4299e1)",
+      gradient: "linear-gradient(135deg, #1d4ed8, #3b82f6)",
     },
     {
       title: "Accessibility",
