@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -51,8 +49,8 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     /* Virtual Labs Redesign Custom Tokens */
-    --vlabs-primary: #3182ce;
-    --vlabs-primary-light: #4299e1;
+    --vlabs-primary: #1d4ed8;
+    --vlabs-primary-light: #3b82f6;
     --vlabs-success: #10b981;
     --vlabs-success-light: #48bb78;
     --vlabs-warning: #f59e0b;

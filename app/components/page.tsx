@@ -18,7 +18,7 @@ export default function ComponentsPage() {
       href: "/components/buttons",
       count: 8,
       status: "Stable",
-      gradient: "linear-gradient(135deg, #3182ce, #4299e1)",
+      gradient: "linear-gradient(135deg, #1d4ed8, #3b82f6)",
     },
     {
       title: "Forms",
@@ -44,7 +44,7 @@ export default function ComponentsPage() {
       icon: BarChart3,
       href: "/components/data-display",
       count: 10,
-      status: "Beta",
+      status: "Stable",
       gradient: "linear-gradient(135deg, #f59e0b, #ed8936)",
     },
     {
@@ -170,9 +170,9 @@ export default function ComponentsPage() {
           marginBottom: '60px',
         }}>
           {[
-            { value: '48', label: 'Components', bg: '#eff6ff', border: '#bfdbfe', color: '#1d4ed8' },
-            { value: '42', label: 'Stable', bg: '#f0fdf4', border: '#bbf7d0', color: '#16a34a' },
-            { value: '6', label: 'Beta', bg: '#fffbeb', border: '#fde68a', color: '#d97706' },
+            { value: String(componentCategories.length), label: 'Categories', bg: '#eff6ff', border: '#bfdbfe', color: '#1d4ed8' },
+            { value: String(componentCategories.reduce((sum, c) => sum + c.count, 0)), label: 'Examples', bg: '#f0fdf4', border: '#bbf7d0', color: '#16a34a' },
+            { value: String(componentCategories.filter((c) => c.status === 'Stable').length), label: 'Stable', bg: '#ecfdf5', border: '#a7f3d0', color: '#059669' },
             { value: '100%', label: 'Accessible', bg: '#faf5ff', border: '#e9d5ff', color: '#9333ea' },
           ].map((stat, i) => (
             <div key={i} style={{

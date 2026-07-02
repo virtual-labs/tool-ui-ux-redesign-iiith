@@ -1,5 +1,6 @@
 "use client"
 
+import { PageContainer } from "@/components/page-container"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -8,7 +9,8 @@ import { BookOpen, Globe, MessageSquare, AlertTriangle, CheckCircle, Target, Eye
 
 export default function ContentGuidelinesPage() {
   return (
-    <div className="space-y-8">
+    <PageContainer>
+      <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4">Content Guidelines</h1>
         <p className="text-xl text-muted-foreground mb-6">
@@ -681,5 +683,6 @@ export default function ContentGuidelinesPage() {
         </TabsContent>
       </Tabs>
     </div>
+    </PageContainer>
   )
 }

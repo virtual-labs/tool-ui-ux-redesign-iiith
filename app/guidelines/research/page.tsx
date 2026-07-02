@@ -1,5 +1,6 @@
 "use client"
 
+import { PageContainer } from "@/components/page-container"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
@@ -7,7 +8,8 @@ import { Search, Users, BarChart3, FileText, Target, Eye, CheckCircle } from "lu
 
 export default function ResearchGuidelinesPage() {
   return (
-    <div className="space-y-8">
+    <PageContainer>
+      <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4">Research Guidelines</h1>
         <p className="text-xl text-muted-foreground mb-6">
@@ -1008,5 +1010,6 @@ export default function ResearchGuidelinesPage() {
         </TabsContent>
       </Tabs>
     </div>
+    </PageContainer>
   )
 }

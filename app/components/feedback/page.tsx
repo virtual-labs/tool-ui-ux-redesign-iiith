@@ -1,5 +1,6 @@
 "use client"
 
+import { PageContainer } from "@/components/page-container"
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -41,8 +42,8 @@ export default function FeedbackPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-6xl mx-auto">
+    <PageContainer>
+      <div className="space-y-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">Feedback</h1>
           <p className="text-xl text-muted-foreground mb-4">
@@ -681,6 +682,6 @@ export default function FeedbackPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </PageContainer>
   )
 }

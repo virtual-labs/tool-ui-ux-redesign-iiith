@@ -1,5 +1,6 @@
 "use client"
 
+import { PageContainer } from "@/components/page-container"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -18,8 +19,8 @@ export default function LabInterfacePage() {
   const [progress, setProgress] = useState(0)
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-7xl mx-auto">
+    <PageContainer maxWidth="7xl">
+      <div className="space-y-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">Lab Interface Pattern</h1>
           <p className="text-xl text-muted-foreground mb-4">
@@ -380,7 +381,7 @@ export default function LabInterfacePage() {
                       </CardHeader>
                       <CardContent className="h-full flex items-center justify-center">
                         <div className="relative w-full max-w-lg aspect-square bg-black rounded-full border-4 border-gray-800 flex items-center justify-center">
-                          <div className="w-4/5 h-4/5 bg-gradient-radial from-gray-100 to-gray-300 rounded-full flex items-center justify-center">
+                          <div className="w-4/5 h-4/5 bg-[radial-gradient(circle_at_center,#f3f4f6,#d1d5db)] rounded-full flex items-center justify-center">
                             <div className="text-center">
                               <div className="text-xs text-gray-600 mb-2">Onion Cell Sample</div>
                               <div className="grid grid-cols-3 gap-1">
@@ -605,6 +606,6 @@ export default function LabInterfacePage() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </PageContainer>
   )
 }

@@ -10,7 +10,6 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Virtual Labs Design System",
   description: "A comprehensive design system for virtual laboratory experiences",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({

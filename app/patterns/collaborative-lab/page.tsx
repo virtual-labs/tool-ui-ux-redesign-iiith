@@ -1,5 +1,6 @@
 "use client"
 
+import { PageContainer } from "@/components/page-container"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -51,7 +52,8 @@ const chatMessages = [
 
 export default function CollaborativeLabPage() {
   return (
-    <div className="space-y-8">
+    <PageContainer>
+      <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4">Collaborative Lab Patterns</h1>
         <p className="text-xl text-muted-foreground mb-6">
@@ -722,5 +724,6 @@ export default function CollaborativeLabPage() {
         </TabsContent>
       </Tabs>
     </div>
+    </PageContainer>
   )
 }
