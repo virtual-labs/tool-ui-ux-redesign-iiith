@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { DSStepper } from "@/components/design-system"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
@@ -384,6 +385,56 @@ export default function NavigationPage() {
     </div>
   </div>
 </div>`}</code>
+                  </pre>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Design System Stepper Progress */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Lab Stepper Progress (DSStepper)</CardTitle>
+                <CardDescription>Step-by-step progress timelines indicating active, completed, and locked steps in simulations</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="p-4 border rounded-lg bg-white">
+                  <DSStepper 
+                    steps={[
+                      { label: "Prepare Samples", description: "Select reagent concentrations" },
+                      { label: "Calibrate Equipment", description: "Set temperature and pH limits" },
+                      { label: "Run Simulation", description: "Collect sensor readings" },
+                      { label: "Analyze Results", description: "Plot observations on graph" }
+                    ]} 
+                    currentStep={2}
+                  />
+                </div>
+                <div className="bg-muted p-4 rounded-lg relative">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="absolute top-2 right-2"
+                    onClick={() =>
+                      copyCode(`<DSStepper 
+  steps={[
+    { label: "Prepare Samples", description: "Select reagent concentrations" },
+    { label: "Calibrate Equipment", description: "Set temperature limits" },
+    { label: "Run Simulation", description: "Collect sensor readings" }
+  ]} 
+  currentStep={1}
+/>`)
+                    }
+                  >
+                    {copiedCode ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  </Button>
+                  <pre className="text-sm">
+                    <code>{`<DSStepper 
+  steps={[
+    { label: "Prepare Samples", description: "Select reagent concentrations" },
+    { label: "Calibrate Equipment", description: "Set temperature limits" },
+    { label: "Run Simulation", description: "Collect sensor readings" }
+  ]} 
+  currentStep={1}
+/>`}</code>
                   </pre>
                 </div>
               </CardContent>

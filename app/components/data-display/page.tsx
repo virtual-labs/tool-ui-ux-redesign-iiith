@@ -70,6 +70,20 @@ export default function DataDisplayPage() {
     }
   }
 
+  const exportToCSV = () => {
+    const headers = ["Experiment ID", "Name", "Status", "Progress", "Date", "Researcher"];
+    const rows = experimentData.map(e => [e.id, e.name, e.status, `${e.progress}%`, e.date, e.researcher]);
+    const csvContent = "data:text/csv;charset=utf-8," 
+      + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "experiment_results.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
@@ -105,7 +119,7 @@ export default function DataDisplayPage() {
                         <Filter className="mr-2 h-4 w-4" />
                         Filter
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={exportToCSV}>
                         <Download className="mr-2 h-4 w-4" />
                         Export
                       </Button>

@@ -5,9 +5,9 @@ export const designSystem = {
   // Colors - Updated to match StyleRecommendations.txt exactly
   colors: {
     primary: {
-      base: '#3182ce',
-      light: '#4299e1',
-      gradient: 'linear-gradient(135deg, #3182ce, #4299e1)'
+      base: '#1d4ed8',
+      light: '#3b82f6',
+      gradient: 'linear-gradient(135deg, #1d4ed8, #3b82f6)'
     },
     success: {
       base: '#10b981',
