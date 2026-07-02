@@ -1,6 +1,6 @@
 'use client';
 
-import { Palette, Type, Ruler, Grid, CornerDownRight, Layers } from "lucide-react"
+import { Palette, Type, Ruler, Grid, CornerDownRight, Layers, ArrowRight, Code } from "lucide-react"
 import Link from "next/link"
 import { DSCard, DSHeading1, DSHeading2, DSHeading3, DSParagraph, DSBadge } from "@/components/design-system"
 import { designSystem } from "@/lib/design-system"
@@ -51,134 +51,164 @@ export default function FoundationsPage() {
     },
   ]
 
-  return (
-    <div style={{
-      minHeight: '100vh',
-      background: designSystem.colors.background.gradient,
-      fontFamily: designSystem.typography.fontFamily.primary,
-    }}>
-      {/* Hero Section with Gradient Background */}
-      <div style={{
-        background: designSystem.colors.background.gradient,
-        padding: `${designSystem.layout.spacing.xxl} ${designSystem.layout.spacing.lg}`,
-        textAlign: 'center',
-        color: 'white',
-      }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <DSHeading1 style={{
-            fontSize: '3rem',
-            marginBottom: designSystem.layout.spacing.md,
-            color: 'white',
-            fontWeight: designSystem.typography.fontWeight.headers,
-          }}>
-            ✨ Foundations
-          </DSHeading1>
-          <DSParagraph style={{
-            fontSize: '1.3rem',
-            color: 'rgba(255, 255, 255, 0.9)',
-            lineHeight: '1.6',
-            marginBottom: 0,
-          }}>
-            Core design principles and tokens that form the foundation of the Virtual Labs Design System.
-          </DSParagraph>
-        </div>
-      </div>
+  const pageStyle: React.CSSProperties = {
+    minHeight: '100vh',
+    backgroundColor: '#ffffff',
+    backgroundImage: 'radial-gradient(#e2e8f0 1.5px, transparent 1.5px)',
+    backgroundSize: '30px 30px',
+    fontFamily: designSystem.typography.fontFamily.primary,
+    color: '#0f172a',
+    overflowX: 'hidden',
+  };
 
-      {/* Main Content */}
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: `${designSystem.layout.spacing.xxl} ${designSystem.layout.spacing.lg}`,
-        marginTop: '-40px',
-        position: 'relative',
-        zIndex: 1,
-      }}>
+  const containerStyle: React.CSSProperties = {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '80px 24px',
+    position: 'relative',
+    zIndex: 10,
+  };
+
+  const heroBadgeStyle: React.CSSProperties = {
+    background: '#eff6ff',
+    color: '#1d4ed8',
+    border: '1px solid #bfdbfe',
+    fontSize: '0.85rem',
+    fontWeight: 600,
+    padding: '6px 14px',
+    borderRadius: '9999px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    marginBottom: '24px',
+    boxShadow: '0 2px 8px rgba(29, 78, 216, 0.05)',
+  };
+
+  const mainHeadingStyle: React.CSSProperties = {
+    fontSize: '3.5rem',
+    fontWeight: 800,
+    lineHeight: '1.1',
+    letterSpacing: '-0.02em',
+    color: '#0f172a',
+    marginBottom: '24px',
+  };
+
+  const highlightText: React.CSSProperties = {
+    background: 'linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  };
+
+  const subtitleStyle: React.CSSProperties = {
+    fontSize: '1.2rem',
+    color: '#475569',
+    maxWidth: '650px',
+    margin: '0 auto 40px',
+    lineHeight: '1.65',
+  };
+
+  const featureCardStyle: React.CSSProperties = {
+    background: '#ffffff',
+    border: '1px solid #e2e8f0',
+    borderRadius: '20px',
+    padding: '32px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    minHeight: '260px',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.02)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+    textDecoration: 'none',
+  };
+
+  return (
+    <div style={pageStyle}>
+      <div style={containerStyle}>
+        
+        {/* Hero Section */}
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <div style={heroBadgeStyle}>
+            <Palette style={{ width: '14px', height: '14px', color: '#1d4ed8' }} />
+            <span>Design Tokens & Foundations</span>
+          </div>
+          <h1 style={mainHeadingStyle}>
+            Core <span style={highlightText}>Foundations</span>
+          </h1>
+          <p style={subtitleStyle}>
+            Core design principles and tokens that form the foundation of the Virtual Labs Design System.
+          </p>
+        </div>
+
+        {/* Grid of Foundations */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: designSystem.layout.spacing.lg,
-          marginBottom: designSystem.layout.spacing.xxl,
+          gap: '24px',
+          marginBottom: '60px',
         }}>
           {foundations.map((item, index) => {
-            // Create different gradient backgrounds for each card
-            const gradients = [
-              'linear-gradient(135deg, #667eea, #764ba2)', // Purple
-              'linear-gradient(135deg, #3182ce, #4299e1)', // Blue
-              'linear-gradient(135deg, #10b981, #48bb78)', // Green
-              'linear-gradient(135deg, #f59e0b, #ed8936)', // Orange
-              'linear-gradient(135deg, #8b5cf6, #a855f7)', // Purple variant
-              'linear-gradient(135deg, #ef4444, #f56565)', // Red
-            ];
+            const iconColor = index % 2 === 0 ? '#1d4ed8' : '#3b82f6';
+            const iconBg = index % 2 === 0 ? '#eff6ff' : '#f0fdf4';
             
             return (
               <Link key={item.href} href={item.href} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <DSCard interactive style={{ 
-                  height: '100%', 
-                  cursor: 'pointer',
-                  background: 'white',
-                  overflow: 'hidden',
-                  position: 'relative',
-                }}>
-                  {/* Colorful header bar */}
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '4px',
-                    background: gradients[index % gradients.length],
-                  }} />
-                  
-                  <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'space-between',
-                    marginBottom: designSystem.layout.spacing.md,
-                    marginTop: designSystem.layout.spacing.sm,
-                  }}>
-                    <div style={{
-                      width: '50px',
-                      height: '50px',
-                      borderRadius: '12px',
-                      background: gradients[index % gradients.length],
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                <div style={featureCardStyle}>
+                  <div>
+                    <div style={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'space-between',
+                      marginBottom: '20px',
                     }}>
-                      <item.icon style={{ 
-                        height: '24px', 
-                        width: '24px', 
-                        color: 'white' 
-                      }} />
+                      <div style={{
+                        width: '48px',
+                        height: '48px',
+                        borderRadius: '12px',
+                        background: iconBg,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                        <item.icon style={{ 
+                          height: '22px', 
+                          width: '22px', 
+                          color: iconColor 
+                        }} />
+                      </div>
+                      <DSBadge style={{
+                        background: item.status === "Beta" 
+                          ? '#f59e0b'
+                          : '#10b981',
+                        color: 'white',
+                        marginBottom: 0,
+                        border: 'none',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                      }}>
+                        {item.status}
+                      </DSBadge>
                     </div>
-                    <DSBadge style={{
-                      background: item.status === "Beta" 
-                        ? designSystem.colors.warning.base
-                        : designSystem.colors.success.base,
-                      color: 'white',
-                      marginBottom: 0,
-                      fontSize: '0.75rem',
-                      fontWeight: designSystem.typography.fontWeight.labels,
+                    <h3 style={{ 
+                      fontSize: '1.25rem',
+                      fontWeight: 700,
+                      marginBottom: '8px',
+                      color: '#0f172a',
                     }}>
-                      {item.status}
-                    </DSBadge>
+                      {item.title}
+                    </h3>
+                    <p style={{ 
+                      color: '#475569',
+                      margin: 0,
+                      fontSize: '0.9rem',
+                      lineHeight: '1.5',
+                    }}>
+                      {item.description}
+                    </p>
                   </div>
-                  <DSHeading3 style={{ 
-                    marginBottom: designSystem.layout.spacing.sm,
-                    color: designSystem.colors.neutral.dark,
-                    fontSize: '1.25rem',
-                  }}>
-                    {item.title}
-                  </DSHeading3>
-                  <DSParagraph style={{ 
-                    color: designSystem.colors.neutral.medium,
-                    margin: 0,
-                    fontSize: '0.95rem',
-                    lineHeight: '1.5',
-                  }}>
-                    {item.description}
-                  </DSParagraph>
-                </DSCard>
+                  <div style={{ marginTop: '24px', display: 'inline-flex', alignItems: 'center', color: '#1d4ed8', fontWeight: 600, fontSize: '0.9rem', gap: '4px' }}>
+                    Explore tokens <ArrowRight style={{ width: '16px', height: '16px', marginLeft: '4px' }} />
+                  </div>
+                </div>
               </Link>
             );
           })}
@@ -186,118 +216,95 @@ export default function FoundationsPage() {
 
         {/* Design Tokens Section */}
         <div style={{
-          background: 'white',
-          borderRadius: designSystem.borderRadius.cards,
-          boxShadow: designSystem.elevation.level2,
-          overflow: 'hidden',
+          background: '#ffffff',
+          borderRadius: '20px',
+          border: '1px solid #e2e8f0',
+          padding: '40px',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.03)',
         }}>
-          {/* Colorful header for the section */}
-          <div style={{
-            background: 'linear-gradient(135deg, #667eea, #764ba2)',
-            padding: designSystem.layout.spacing.lg,
-            color: 'white',
-          }}>
-            <DSHeading2 style={{ 
-              color: 'white',
-              marginBottom: designSystem.layout.spacing.sm,
-              fontSize: '1.75rem',
-            }}>
-              🎨 Design Tokens
-            </DSHeading2>
-            <DSParagraph style={{
-              color: 'rgba(255, 255, 255, 0.9)',
-              margin: 0,
-              fontSize: '1rem',
-            }}>
-              The building blocks of our design system
-            </DSParagraph>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1d4ed8', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>
+              <Code style={{ width: '14px', height: '14px' }} />
+              <span>Design System Atoms</span>
+            </div>
+            <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '16px', color: '#0f172a', letterSpacing: '-0.01em' }}>
+              Design Tokens
+            </h2>
+            <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '32px' }}>
+              Design tokens are the visual design atoms of our system — specifically, named entities that store attributes such as colors, typography scales, and shadows to ensure multi-platform consistency.
+            </p>
           </div>
-          
-          <div style={{ padding: designSystem.layout.spacing.lg }}>
-            <DSHeading3 style={{ 
-              marginBottom: designSystem.layout.spacing.md,
-              color: designSystem.colors.neutral.dark,
-            }}>
-              What are Design Tokens?
-            </DSHeading3>
-            <DSParagraph style={{
-              color: designSystem.colors.neutral.medium,
-              marginBottom: designSystem.layout.spacing.lg,
-              fontSize: '1rem',
-              lineHeight: '1.6',
-            }}>
-              Design tokens are the visual design atoms of the design system — specifically, they are named entities
-              that store visual design attributes. They ensure consistency across all Virtual Labs products.
-            </DSParagraph>
-            
-            {/* Color tokens showcase */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: designSystem.layout.spacing.md,
-              marginBottom: designSystem.layout.spacing.lg,
-            }}>
-              {[
-                { name: 'Primary', color: designSystem.colors.primary.base, bg: designSystem.colors.primary.gradient },
-                { name: 'Success', color: designSystem.colors.success.base, bg: `linear-gradient(135deg, ${designSystem.colors.success.base}, ${designSystem.colors.success.light})` },
-                { name: 'Warning', color: designSystem.colors.warning.base, bg: `linear-gradient(135deg, ${designSystem.colors.warning.base}, ${designSystem.colors.warning.light})` },
-                { name: 'Error', color: designSystem.colors.error.base, bg: `linear-gradient(135deg, ${designSystem.colors.error.base}, ${designSystem.colors.error.light})` },
-              ].map((token) => (
-                <div key={token.name} style={{
-                  borderRadius: designSystem.borderRadius.components,
-                  overflow: 'hidden',
-                  border: `1px solid ${designSystem.colors.neutral.light}`,
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '16px',
+            marginBottom: '32px',
+          }}>
+            {[
+              { name: 'Primary Base', color: '#1d4ed8', bg: 'linear-gradient(135deg, #1d4ed8, #3b82f6)' },
+              { name: 'Success', color: '#10b981', bg: 'linear-gradient(135deg, #10b981, #48bb78)' },
+              { name: 'Warning', color: '#f59e0b', bg: 'linear-gradient(135deg, #f59e0b, #ed8936)' },
+              { name: 'Error', color: '#ef4444', bg: 'linear-gradient(135deg, #ef4444, #f56565)' },
+            ].map((token) => (
+              <div key={token.name} style={{
+                borderRadius: '12px',
+                overflow: 'hidden',
+                border: '1px solid #e2e8f0',
+                background: '#ffffff',
+              }}>
+                <div style={{
+                  height: '60px',
+                  background: token.bg,
+                }} />
+                <div style={{
+                  padding: '12px',
+                  textAlign: 'center',
                 }}>
                   <div style={{
-                    height: '60px',
-                    background: token.bg,
-                  }} />
-                  <div style={{
-                    padding: designSystem.layout.spacing.sm,
-                    textAlign: 'center',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    color: '#0f172a',
                   }}>
-                    <div style={{
-                      fontSize: '0.85rem',
-                      fontWeight: designSystem.typography.fontWeight.labels,
-                      color: designSystem.colors.neutral.dark,
-                    }}>
-                      {token.name}
-                    </div>
-                    <div style={{
-                      fontSize: '0.75rem',
-                      color: designSystem.colors.neutral.medium,
-                      fontFamily: designSystem.typography.fontFamily.mono,
-                    }}>
-                      {token.color}
-                    </div>
+                    {token.name}
+                  </div>
+                  <div style={{
+                    fontSize: '0.75rem',
+                    color: '#64748b',
+                    fontFamily: designSystem.typography.fontFamily.mono,
+                    marginTop: '2px',
+                  }}>
+                    {token.color}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
-            <div style={{
-              background: designSystem.colors.neutral.dark,
-              padding: designSystem.layout.spacing.lg,
-              borderRadius: designSystem.borderRadius.components,
-              border: `1px solid ${designSystem.colors.neutral.medium}`,
+          <div style={{
+            background: '#f8fafc',
+            padding: '24px',
+            borderRadius: '12px',
+            border: '1px solid #e2e8f0',
+          }}>
+            <pre style={{
+              fontFamily: designSystem.typography.fontFamily.mono,
+              fontSize: '0.85rem',
+              color: '#0f172a',
+              margin: 0,
+              whiteSpace: 'pre-wrap',
+              lineHeight: '1.6',
             }}>
-              <pre style={{
-                fontFamily: designSystem.typography.fontFamily.mono,
-                fontSize: '0.9rem',
-                color: designSystem.colors.success.light,
-                margin: 0,
-                whiteSpace: 'pre-wrap',
-                lineHeight: '1.5',
-              }}>
-{`// Example: VLabs Color Tokens
---vl-color-primary: #3182ce;
---vl-color-primary-light: #4299e1;
---vl-color-success: #10b981;
---vl-color-warning: #f59e0b;
---vl-color-error: #ef4444;
---vl-bg-gradient: linear-gradient(135deg, #667eea, #764ba2);`}
-              </pre>
-            </div>
+{`// Exported Design Tokens
+export const designSystem = {
+  colors: {
+    primary: { base: '#1d4ed8', light: '#3b82f6' },
+    success: { base: '#10b981', light: '#48bb78' },
+    warning: { base: '#f59e0b', light: '#ed8936' },
+    error:   { base: '#ef4444', light: '#f56565' }
+  }
+};`}
+            </pre>
           </div>
         </div>
       </div>

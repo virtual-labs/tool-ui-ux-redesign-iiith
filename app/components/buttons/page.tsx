@@ -3,9 +3,10 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { DSButton } from "@/components/design-system"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Copy, Check, Play, Download, Settings, Trash2 } from "lucide-react"
+import { Copy, Check, Play, Download, Settings, Trash2, Loader2 } from "lucide-react"
 
 export default function ButtonsPage() {
   const [copiedCode, setCopiedCode] = useState<string | null>(null)
@@ -177,13 +178,14 @@ export default function ButtonsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>States</CardTitle>
-                <CardDescription>Different button states for user feedback</CardDescription>
+                <CardDescription>Different button states for user feedback (Interactive Design System Buttons)</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-4 mb-6">
-                  <Button>Normal</Button>
-                  <Button disabled>Disabled</Button>
-                  <Button className="opacity-75">Loading</Button>
+                <div className="flex flex-wrap gap-4 mb-6 items-center">
+                  <DSButton variant="primary">Normal DSButton</DSButton>
+                  <DSButton variant="primary" disabled>Disabled DSButton</DSButton>
+                  <DSButton variant="primary" isLoading>Loading DSButton</DSButton>
+                  <DSButton variant="success" isLoading>Success Loading</DSButton>
                 </div>
                 <div className="bg-muted p-4 rounded-lg relative">
                   <Button
@@ -191,15 +193,17 @@ export default function ButtonsPage() {
                     size="sm"
                     className="absolute top-2 right-2"
                     onClick={() =>
-                      copyCode(`<Button>Normal</Button>
-<Button disabled>Disabled</Button>`)
+                      copyCode(`<DSButton variant="primary">Normal DSButton</DSButton>
+<DSButton variant="primary" disabled>Disabled DSButton</DSButton>
+<DSButton variant="primary" isLoading>Loading DSButton</DSButton>`)
                     }
                   >
                     {copiedCode ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                   </Button>
                   <pre className="text-sm">
-                    <code>{`<Button>Normal</Button>
-<Button disabled>Disabled</Button>`}</code>
+                    <code>{`<DSButton variant="primary">Normal DSButton</DSButton>
+<DSButton variant="primary" disabled>Disabled DSButton</DSButton>
+<DSButton variant="primary" isLoading>Loading DSButton</DSButton>`}</code>
                   </pre>
                 </div>
               </CardContent>

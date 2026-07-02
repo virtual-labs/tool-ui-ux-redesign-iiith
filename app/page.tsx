@@ -1,380 +1,262 @@
 'use client';
 
-import { ArrowRight, Palette, Code, Accessibility, BookOpen } from "lucide-react"
-import { designSystem } from "@/lib/design-system"
-import { DSButton, DSCard, DSBadge, DSHeading1, DSHeading2, DSHeading3, DSParagraph, DSCode } from "@/components/design-system"
+import React, { useState } from "react";
+import { ArrowRight, Palette, Code, Layers, Sparkles, Beaker, Check, Activity } from "lucide-react";
+import Link from "next/link";
+import { designSystem } from "@/lib/design-system";
+import { DSButton, DSCard, DSBadge, DSHeading2, DSHeading3, DSParagraph, DSInput } from "@/components/design-system";
 
 export default function HomePage() {
-  const heroSectionStyle: React.CSSProperties = {
+  const [demoLoading, setDemoLoading] = useState(false);
+  const [demoInput, setDemoInput] = useState("25");
+
+  const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
-    background: designSystem.colors.background.gradient,
+    backgroundColor: '#ffffff',
+    backgroundImage: 'radial-gradient(#e2e8f0 1.5px, transparent 1.5px)',
+    backgroundSize: '30px 30px',
     fontFamily: designSystem.typography.fontFamily.primary,
-    position: 'relative',
-    overflow: 'hidden',
+    color: '#0f172a',
+    overflowX: 'hidden',
   };
 
   const containerStyle: React.CSSProperties = {
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: `${designSystem.layout.spacing.xxl} ${designSystem.layout.spacing.lg}`,
+    padding: '80px 24px',
+    position: 'relative',
+    zIndex: 10,
   };
 
-  const heroContentStyle: React.CSSProperties = {
-    textAlign: 'center',
-    maxWidth: '800px',
-    margin: '0 auto',
-    color: 'white',
-    position: 'relative',
-    zIndex: 2,
+  const heroBadgeStyle: React.CSSProperties = {
+    background: '#eff6ff',
+    color: '#1d4ed8',
+    border: '1px solid #bfdbfe',
+    fontSize: '0.85rem',
+    fontWeight: 600,
+    padding: '6px 14px',
+    borderRadius: '9999px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    marginBottom: '24px',
+    boxShadow: '0 2px 8px rgba(29, 78, 216, 0.05)',
   };
 
   const mainHeadingStyle: React.CSSProperties = {
-    fontSize: '4rem',
-    fontWeight: designSystem.typography.fontWeight.headers,
-    fontFamily: designSystem.typography.fontFamily.primary,
-    background: 'linear-gradient(135deg, #ffffff, #e2e8f0)',
+    fontSize: '4.25rem',
+    fontWeight: 800,
+    lineHeight: '1.1',
+    letterSpacing: '-0.02em',
+    color: '#0f172a',
+    marginBottom: '24px',
+  };
+
+  const highlightText: React.CSSProperties = {
+    background: 'linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    marginBottom: designSystem.layout.spacing.lg,
-    lineHeight: '1.1',
-    textShadow: '0 2px 4px rgba(0,0,0,0.1)',
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: '1.3rem',
-    fontWeight: designSystem.typography.fontWeight.body,
-    fontFamily: designSystem.typography.fontFamily.primary,
-    color: 'rgba(255, 255, 255, 0.95)',
-    marginBottom: designSystem.layout.spacing.xl,
-    lineHeight: '1.6',
-    textShadow: '0 1px 2px rgba(0,0,0,0.1)',
+    fontSize: '1.2rem',
+    color: '#475569',
+    maxWidth: '650px',
+    margin: '0 auto 40px',
+    lineHeight: '1.65',
   };
 
-  const buttonContainerStyle: React.CSSProperties = {
+  const featureCardStyle: React.CSSProperties = {
+    background: '#ffffff',
+    border: '1px solid #e2e8f0',
+    borderRadius: '20px',
+    padding: '32px',
     display: 'flex',
-    gap: designSystem.layout.spacing.md,
-    justifyContent: 'center',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    minHeight: '260px',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.02)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
   };
 
   return (
-    <div style={heroSectionStyle}>
-      {/* Animated background elements */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 70%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 70%)',
-        zIndex: 1,
-      }} />
-      
-      {/* Hero Section */}
-      <section style={containerStyle}>
-        <div style={heroContentStyle}>
-          <DSBadge style={{
-            background: 'rgba(255, 255, 255, 0.2)',
-            color: 'white',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            backdropFilter: 'blur(10px)',
-            fontSize: '0.9rem',
-            padding: `${designSystem.layout.spacing.sm} ${designSystem.layout.spacing.md}`,
-          }}>
-            ✨ Virtual Labs Design System v1.0
-          </DSBadge>
+    <div style={pageStyle}>
+      {/* Header Grid */}
+      <div style={containerStyle}>
+        
+        {/* Hero Copy */}
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <div style={heroBadgeStyle}>
+            <Sparkles style={{ width: '14px', height: '14px', color: '#1d4ed8' }} />
+            <span>Virtual Labs Redesign v2.1</span>
+          </div>
           <h1 style={mainHeadingStyle}>
-            Virtual Labs Design System
+            The Science of <span style={highlightText}>Clean Interface</span>
           </h1>
           <p style={subtitleStyle}>
-            A comprehensive design system for building consistent, accessible, and beautiful virtual laboratory
-            experiences. Built with modern web standards and copy-paste components.
+            An editorial, highly readable design system for chemistry, physics, and biology simulations. Designed to maximize readability and usability for students.
           </p>
-          <div style={buttonContainerStyle}>
-            <DSButton href="/foundations" variant="primary" style={{
-              fontSize: '1.1rem',
-              padding: `${designSystem.layout.spacing.md} ${designSystem.layout.spacing.xl}`,
-              boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
-            }}>
-              Get Started <ArrowRight style={{ marginLeft: designSystem.layout.spacing.sm, width: '20px', height: '20px' }} />
+
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <DSButton href="/components" variant="primary" style={{ padding: '12px 24px', fontSize: '0.95rem', borderRadius: '10px', fontWeight: 600, backgroundColor: '#1d4ed8' }}>
+              Explore Components <ArrowRight style={{ marginLeft: '8px', width: '16px', height: '16px' }} />
             </DSButton>
-            <DSButton href="/components" variant="secondary" style={{
-              fontSize: '1.1rem',
-              padding: `${designSystem.layout.spacing.md} ${designSystem.layout.spacing.xl}`,
-              backdropFilter: 'blur(10px)',
-              background: 'rgba(255, 255, 255, 0.15)',
-              border: '2px solid rgba(255, 255, 255, 0.3)',
-              color: 'white',
+            <DSButton href="/foundations" variant="secondary" style={{
+              padding: '12px 24px',
+              fontSize: '0.95rem',
+              borderRadius: '10px',
+              fontWeight: 600,
+              backgroundColor: '#ffffff',
+              border: '1px solid #cbd5e1',
+              color: '#0f172a'
             }}>
-              Browse Components
+              View Foundations
             </DSButton>
           </div>
         </div>
-      </section>
 
-      {/* Features Grid */}
-      <section style={{
-        ...containerStyle,
-        background: 'rgba(255, 255, 255, 0.95)',
-        backdropFilter: 'blur(20px)',
-        borderRadius: `${designSystem.borderRadius.cards} ${designSystem.borderRadius.cards} 0 0`,
-        marginTop: '-60px',
-        position: 'relative',
-        zIndex: 3,
-        boxShadow: '0 -10px 40px rgba(0,0,0,0.1)',
-      }}>
-        <DSHeading2 style={{
-          fontSize: '2.5rem',
-          textAlign: 'center',
-          background: designSystem.colors.background.gradient,
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          marginBottom: designSystem.layout.spacing.xl,
-          fontWeight: designSystem.typography.fontWeight.headers,
-        }}>
-          🚀 Explore Our Design System
-        </DSHeading2>
+        {/* Key Pillars Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: designSystem.layout.spacing.lg,
+          gap: '24px',
+          marginBottom: '80px'
         }}>
-          <DSCard interactive style={{
-            background: 'linear-gradient(135deg, #667eea, #764ba2)',
-            color: 'white',
-            border: 'none',
-          }}>
-            <div style={{ marginBottom: designSystem.layout.spacing.md }}>
-              <Palette style={{ 
-                width: '40px', 
-                height: '40px', 
-                color: 'white',
-                marginBottom: designSystem.layout.spacing.md 
-              }} />
-              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem' }}>Foundations</DSHeading3>
-              <DSParagraph style={{
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontSize: '0.95rem',
-                marginBottom: designSystem.layout.spacing.md,
-                lineHeight: '1.5',
+          {/* Foundations Card */}
+          <div style={featureCardStyle}>
+            <div>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '12px',
+                backgroundColor: '#eff6ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '20px',
               }}>
-                Design tokens, colors, typography, and core principles
-              </DSParagraph>
+                <Palette style={{ color: '#1d4ed8', width: '22px', height: '22px' }} />
+              </div>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '8px', color: '#0f172a' }}>Visual Foundations</h3>
+              <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '20px' }}>
+                Centralized CSS color variables, structured typography scales, padding metrics, and clean card shadows.
+              </p>
             </div>
-            <DSButton href="/foundations" variant="secondary" style={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              color: 'white',
-              backdropFilter: 'blur(10px)',
-            }}>
-              Explore Foundations <ArrowRight style={{ marginLeft: designSystem.layout.spacing.sm, width: '16px', height: '16px' }} />
-            </DSButton>
-          </DSCard>
-
-          <DSCard interactive style={{
-            background: 'linear-gradient(135deg, #10b981, #48bb78)',
-            color: 'white',
-            border: 'none',
-          }}>
-            <div style={{ marginBottom: designSystem.layout.spacing.md }}>
-              <Code style={{ 
-                width: '40px', 
-                height: '40px', 
-                color: 'white',
-                marginBottom: designSystem.layout.spacing.md 
-              }} />
-              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem' }}>Components</DSHeading3>
-              <DSParagraph style={{
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontSize: '0.95rem',
-                marginBottom: designSystem.layout.spacing.md,
-                lineHeight: '1.5',
-              }}>
-                Ready-to-use components with copy-paste code
-              </DSParagraph>
-            </div>
-            <DSButton href="/components" variant="secondary" style={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              color: 'white',
-              backdropFilter: 'blur(10px)',
-            }}>
-              View Components <ArrowRight style={{ marginLeft: designSystem.layout.spacing.sm, width: '16px', height: '16px' }} />
-            </DSButton>
-          </DSCard>
-
-          <DSCard interactive style={{
-            background: 'linear-gradient(135deg, #8b5cf6, #a855f7)',
-            color: 'white',
-            border: 'none',
-          }}>
-            <div style={{ marginBottom: designSystem.layout.spacing.md }}>
-              <Accessibility style={{ 
-                width: '40px', 
-                height: '40px', 
-                color: 'white',
-                marginBottom: designSystem.layout.spacing.md 
-              }} />
-              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem' }}>Accessibility</DSHeading3>
-              <DSParagraph style={{
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontSize: '0.95rem',
-                marginBottom: designSystem.layout.spacing.md,
-                lineHeight: '1.5',
-              }}>
-                Guidelines for building inclusive experiences
-              </DSParagraph>
-            </div>
-            <DSButton href="/guidelines/accessibility" variant="secondary" style={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              color: 'white',
-              backdropFilter: 'blur(10px)',
-            }}>
-              Learn A11y <ArrowRight style={{ marginLeft: designSystem.layout.spacing.sm, width: '16px', height: '16px' }} />
-            </DSButton>
-          </DSCard>
-
-          <DSCard interactive style={{
-            background: 'linear-gradient(135deg, #f59e0b, #ed8936)',
-            color: 'white',
-            border: 'none',
-          }}>
-            <div style={{ marginBottom: designSystem.layout.spacing.md }}>
-              <BookOpen style={{ 
-                width: '40px', 
-                height: '40px', 
-                color: 'white',
-                marginBottom: designSystem.layout.spacing.md 
-              }} />
-              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem' }}>Guidelines</DSHeading3>
-              <DSParagraph style={{
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontSize: '0.95rem',
-                marginBottom: designSystem.layout.spacing.md,
-                lineHeight: '1.5',
-              }}>
-                Content design and implementation patterns
-              </DSParagraph>
-            </div>
-            <DSButton href="/guidelines" variant="secondary" style={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              color: 'white',
-              backdropFilter: 'blur(10px)',
-            }}>
-              Read Guidelines <ArrowRight style={{ marginLeft: designSystem.layout.spacing.sm, width: '16px', height: '16px' }} />
-            </DSButton>
-          </DSCard>
-        </div>
-      </section>
-
-      {/* Quick Start */}
-      <section style={{
-        ...containerStyle,
-        background: 'white',
-        marginTop: '-40px',
-        borderRadius: designSystem.borderRadius.cards,
-        boxShadow: designSystem.elevation.level3,
-        position: 'relative',
-        zIndex: 2,
-      }}>
-        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <DSHeading2 style={{
-            fontSize: '2.25rem',
-            textAlign: 'center',
-            background: designSystem.colors.background.gradient,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            marginBottom: designSystem.layout.spacing.xl,
-            fontWeight: designSystem.typography.fontWeight.headers,
-          }}>
-            🚀 Quick Start
-          </DSHeading2>
-          
-          <div style={{
-            background: 'linear-gradient(135deg, #667eea, #764ba2)',
-            borderRadius: designSystem.borderRadius.cards,
-            padding: designSystem.layout.spacing.lg,
-            color: 'white',
-            marginBottom: designSystem.layout.spacing.lg,
-          }}>
-            <DSHeading3 style={{
-              color: 'white',
-              marginBottom: designSystem.layout.spacing.md,
-              fontSize: '1.5rem',
-            }}>
-              🎨 Installation
-            </DSHeading3>
-            <DSParagraph style={{
-              color: 'rgba(255, 255, 255, 0.9)',
-              marginBottom: designSystem.layout.spacing.lg,
-              fontSize: '1.1rem',
-              lineHeight: '1.6',
-            }}>
-              Get started with Virtual Labs Design System in your project
-            </DSParagraph>
-            
-            <div style={{
-              background: 'rgba(0, 0, 0, 0.3)',
-              padding: designSystem.layout.spacing.lg,
-              borderRadius: designSystem.borderRadius.components,
-              marginBottom: designSystem.layout.spacing.lg,
-              backdropFilter: 'blur(10px)',
-            }}>
-              <pre style={{
-                fontFamily: designSystem.typography.fontFamily.mono,
-                fontSize: '1rem',
-                color: '#4ade80',
-                margin: 0,
-                whiteSpace: 'pre-wrap',
-                lineHeight: '1.5',
-              }}>
-{`pnpm install @virtual-labs/design-system
-
-# or with yarn
-yarn add @virtual-labs/design-system`}
-              </pre>
-            </div>
-            
-            <div style={{
-              display: 'flex',
-              gap: designSystem.layout.spacing.md,
-              flexWrap: 'wrap',
-            }}>
-              <DSButton href="/foundations" variant="secondary" style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                color: 'white',
-                backdropFilter: 'blur(10px)',
-              }}>
-                📚 View Documentation
-              </DSButton>
-              <DSButton href="/components" variant="secondary" style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                color: 'white',
-                backdropFilter: 'blur(10px)',
-              }}>
-                🧩 Browse Components
-              </DSButton>
-            </div>
+            <Link href="/foundations" style={{ display: 'inline-flex', alignItems: 'center', color: '#1d4ed8', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', gap: '4px' }}>
+              Explore foundations <ArrowRight style={{ width: '16px', height: '16px' }} />
+            </Link>
           </div>
-          
-          <DSParagraph style={{
-            textAlign: 'center',
-            color: designSystem.colors.neutral.medium,
-            fontSize: '1rem',
-            margin: 0,
-            fontStyle: 'italic',
-          }}>
-            ✨ Or copy and paste components directly from our documentation
-          </DSParagraph>
+
+          {/* Components Card */}
+          <div style={featureCardStyle}>
+            <div>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '12px',
+                backgroundColor: '#f0fdf4',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '20px',
+              }}>
+                <Code style={{ color: '#16a34a', width: '22px', height: '22px' }} />
+              </div>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '8px', color: '#0f172a' }}>UI Components</h3>
+              <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '20px' }}>
+                Loaders, unit suffixes fields, stepper timelines, dialog boxes, alert banners, and interactive buttons.
+              </p>
+            </div>
+            <Link href="/components" style={{ display: 'inline-flex', alignItems: 'center', color: '#16a34a', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', gap: '4px' }}>
+              Browse components <ArrowRight style={{ width: '16px', height: '16px' }} />
+            </Link>
+          </div>
+
+          {/* Patterns Card */}
+          <div style={featureCardStyle}>
+            <div>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '12px',
+                backgroundColor: '#faf5ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '20px',
+              }}>
+                <Layers style={{ color: '#9333ea', width: '22px', height: '22px' }} />
+              </div>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '8px', color: '#0f172a' }}>Layout Patterns</h3>
+              <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '20px' }}>
+                Modular columns, charting tools, and live search indexes to organize large simulation dashboards.
+              </p>
+            </div>
+            <Link href="/patterns" style={{ display: 'inline-flex', alignItems: 'center', color: '#9333ea', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', gap: '4px' }}>
+              View patterns <ArrowRight style={{ width: '16px', height: '16px' }} />
+            </Link>
+          </div>
         </div>
-      </section>
+
+        {/* High-Fidelity Interactive Sandbox Widget */}
+        <div style={{
+          background: '#ffffff',
+          borderRadius: '20px',
+          border: '1px solid #e2e8f0',
+          padding: '40px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '40px',
+          alignItems: 'center',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.03)',
+        }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1d4ed8', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <Activity style={{ width: '14px', height: '14px' }} />
+              <span>Interactive Sandbox</span>
+            </div>
+            <h2 style={{ fontSize: '2rem', fontWeight: 800, marginTop: '8px', marginBottom: '16px', color: '#0f172a', letterSpacing: '-0.01em' }}>Test Drive the Redesign</h2>
+            <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '0' }}>
+              Interact directly with our updated Design System controls. Toggle dynamic loaders, verify input field boundaries, and review responsive code.
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', backgroundColor: '#f8fafc', padding: '24px', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+            
+            {/* Input Demo */}
+            <DSInput 
+              label="Simulation Heat Coefficient" 
+              suffix="°C/s" 
+              value={demoInput} 
+              onChange={(e) => setDemoInput(e.target.value)} 
+              placeholder="25"
+            />
+
+            {/* Button Demo */}
+            <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+              <DSButton 
+                variant="primary" 
+                isLoading={demoLoading} 
+                onClick={() => {
+                  setDemoLoading(true);
+                  setTimeout(() => setDemoLoading(false), 2000);
+                }}
+                style={{ backgroundColor: '#1d4ed8' }}
+              >
+                Run Heat Simulation
+              </DSButton>
+              <DSButton 
+                variant="secondary" 
+                onClick={() => setDemoInput("25")} 
+                style={{ backgroundColor: '#ffffff', color: '#0f172a', border: '1px solid #cbd5e1' }}
+              >
+                Reset
+              </DSButton>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
     </div>
-  )
+  );
 }

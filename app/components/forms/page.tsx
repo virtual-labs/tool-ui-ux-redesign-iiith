@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { DSInput } from "@/components/design-system"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -309,6 +310,62 @@ export default function FormsPage() {
                     <Info className="h-4 w-4" />
                     Temperature should be between 20-30°C for optimal results
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Design System Inputs (DSInput)</CardTitle>
+                <CardDescription>Enhanced input controls supporting unit suffixes and integrated error feedback</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <DSInput
+                    id="temp-input"
+                    label="Reactor Temperature"
+                    placeholder="Enter temperature"
+                    suffix="°C"
+                  />
+                  <DSInput
+                    id="volume-input"
+                    label="Reagent Volume"
+                    placeholder="Enter volume"
+                    suffix="mL"
+                  />
+                  <DSInput
+                    id="error-demo"
+                    label="Pressure Gauge"
+                    placeholder="Enter pressure"
+                    suffix="bar"
+                    error="Pressure exceeds maximum safety threshold (15 bar)"
+                    defaultValue="18.5"
+                  />
+                  <DSInput
+                    id="mass-input"
+                    label="Sample Mass"
+                    placeholder="Enter mass"
+                    suffix="mg"
+                  />
+                </div>
+                <div className="bg-muted p-4 rounded-lg relative">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="absolute top-2 right-2"
+                    onClick={() =>
+                      copyCode(`<DSInput label="Reactor Temperature" suffix="°C" placeholder="25" />
+<DSInput label="Reagent Volume" suffix="mL" placeholder="10" />
+<DSInput label="Pressure Gauge" suffix="bar" error="Pressure too high" defaultValue="18.5" />`)
+                    }
+                  >
+                    {copiedCode ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  </Button>
+                  <pre className="text-sm">
+                    <code>{`<DSInput label="Reactor Temperature" suffix="°C" placeholder="25" />
+<DSInput label="Reagent Volume" suffix="mL" placeholder="10" />
+<DSInput label="Pressure Gauge" suffix="bar" error="Pressure too high" defaultValue="18.5" />`}</code>
+                  </pre>
                 </div>
               </CardContent>
             </Card>

@@ -1,6 +1,7 @@
 'use client';
 
-import { FlaskConical, BarChart3, Workflow, Database, Monitor, Users } from "lucide-react"
+import { FlaskConical, BarChart3, Workflow, Database, Monitor, Users, ArrowRight } from "lucide-react"
+import Link from "next/link"
 import { designSystem } from "@/lib/design-system"
 import { DSButton, DSCard, DSBadge, DSHeading1, DSHeading2, DSHeading3, DSParagraph, DSCode } from "@/components/design-system"
 
@@ -64,269 +65,230 @@ export default function PatternsPage() {
 
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
-    background: designSystem.colors.background.gradient,
+    backgroundColor: '#ffffff',
+    backgroundImage: 'radial-gradient(#e2e8f0 1.5px, transparent 1.5px)',
+    backgroundSize: '30px 30px',
     fontFamily: designSystem.typography.fontFamily.primary,
+    color: '#0f172a',
+    overflowX: 'hidden',
   };
 
   const containerStyle: React.CSSProperties = {
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: designSystem.layout.spacing.xl,
+    padding: '80px 24px',
+    position: 'relative',
+    zIndex: 10,
   };
 
-  const heroStyle: React.CSSProperties = {
-    textAlign: 'center',
-    marginBottom: designSystem.layout.spacing.xxl,
-    color: 'white',
+  const heroBadgeStyle: React.CSSProperties = {
+    background: '#eff6ff',
+    color: '#1d4ed8',
+    border: '1px solid #bfdbfe',
+    fontSize: '0.85rem',
+    fontWeight: 600,
+    padding: '6px 14px',
+    borderRadius: '9999px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    marginBottom: '24px',
+    boxShadow: '0 2px 8px rgba(29, 78, 216, 0.05)',
   };
 
   const mainHeadingStyle: React.CSSProperties = {
     fontSize: '3.5rem',
-    fontWeight: designSystem.typography.fontWeight.headers,
-    background: 'linear-gradient(135deg, #ffffff, #e2e8f0)',
+    fontWeight: 800,
+    lineHeight: '1.1',
+    letterSpacing: '-0.02em',
+    color: '#0f172a',
+    marginBottom: '24px',
+  };
+
+  const highlightText: React.CSSProperties = {
+    background: 'linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    marginBottom: designSystem.layout.spacing.lg,
-    lineHeight: '1.1',
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: '1.25rem',
-    color: 'rgba(255, 255, 255, 0.9)',
-    maxWidth: '700px',
-    margin: '0 auto',
-    lineHeight: '1.6',
+    fontSize: '1.2rem',
+    color: '#475569',
+    maxWidth: '650px',
+    margin: '0 auto 40px',
+    lineHeight: '1.65',
+  };
+
+  const featureCardStyle: React.CSSProperties = {
+    background: '#ffffff',
+    border: '1px solid #e2e8f0',
+    borderRadius: '20px',
+    padding: '32px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    minHeight: '260px',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.02)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+    textDecoration: 'none',
   };
 
   return (
     <div style={pageStyle}>
       <div style={containerStyle}>
+        
         {/* Hero Section */}
-        <div style={heroStyle}>
-          <DSBadge style={{
-            background: 'rgba(255, 255, 255, 0.2)',
-            color: 'white',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            backdropFilter: 'blur(10px)',
-            fontSize: '0.9rem',
-            padding: `${designSystem.layout.spacing.sm} ${designSystem.layout.spacing.md}`,
-            marginBottom: designSystem.layout.spacing.lg,
-          }}>
-            🧬 Design Patterns
-          </DSBadge>
-          <h1 style={mainHeadingStyle}>Patterns</h1>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <div style={heroBadgeStyle}>
+            <FlaskConical style={{ width: '14px', height: '14px', color: '#1d4ed8' }} />
+            <span>Design Blueprints</span>
+          </div>
+          <h1 style={mainHeadingStyle}>
+            Layout <span style={highlightText}>Patterns</span>
+          </h1>
           <p style={subtitleStyle}>
-            Common design patterns and templates for Virtual Labs experiences. These patterns combine multiple
-            components to solve specific use cases.
+            Common design patterns and templates for Virtual Labs experiences. These patterns combine multiple components to solve specific use cases.
           </p>
         </div>
 
-        {/* Pattern Categories */}
+        {/* Grid of Patterns */}
         <div style={{
-          background: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(20px)',
-          borderRadius: designSystem.borderRadius.cards,
-          padding: designSystem.layout.spacing.xl,
-          marginBottom: designSystem.layout.spacing.xl,
-          boxShadow: designSystem.elevation.level3,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+          gap: '24px',
+          marginBottom: '60px',
         }}>
-          <DSHeading2 style={{
-            fontSize: '2.25rem',
-            textAlign: 'center',
-            background: designSystem.colors.background.gradient,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            marginBottom: designSystem.layout.spacing.xl,
-            fontWeight: designSystem.typography.fontWeight.headers,
-          }}>
-            🧬 Laboratory Patterns
-          </DSHeading2>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-            gap: designSystem.layout.spacing.lg,
-          }}>
-            {patterns.map((pattern) => (
-              <DSCard key={pattern.href} interactive style={{
-                background: pattern.gradient,
-                color: 'white',
-                border: 'none',
-                cursor: 'pointer',
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: designSystem.layout.spacing.md }}>
-                  <pattern.icon style={{ width: '32px', height: '32px', color: 'white' }} />
-                  <DSBadge style={{
-                    background: pattern.status === "Alpha" ? 'rgba(239, 68, 68, 0.3)' : pattern.status === "Beta" ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.2)',
-                    color: 'white',
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    fontSize: '0.8rem',
-                  }}>
-                    {pattern.status}
-                  </DSBadge>
-                </div>
-                <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.sm }}>
-                  {pattern.title}
-                </DSHeading3>
-                <DSParagraph style={{
-                  color: 'rgba(255, 255, 255, 0.9)',
-                  fontSize: '0.95rem',
-                  marginBottom: designSystem.layout.spacing.md,
-                  lineHeight: '1.5',
-                }}>
-                  {pattern.description}
-                </DSParagraph>
-                <div style={{ marginBottom: designSystem.layout.spacing.sm }}>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 'bold', marginBottom: designSystem.layout.spacing.xs }}>Examples:</div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: designSystem.layout.spacing.xs }}>
-                    {pattern.examples.map((example) => (
-                      <DSBadge key={example} style={{
-                        background: 'rgba(255, 255, 255, 0.2)',
-                        color: 'white',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        fontSize: '0.75rem',
-                        padding: `${designSystem.layout.spacing.xs} ${designSystem.layout.spacing.sm}`,
+          {patterns.map((pattern, index) => {
+            const iconColor = index % 2 === 0 ? '#1d4ed8' : '#3b82f6';
+            const iconBg = index % 2 === 0 ? '#eff6ff' : '#f0fdf4';
+
+            return (
+              <Link key={pattern.href} href={pattern.href} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div style={featureCardStyle}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+                      <div style={{
+                        width: '48px',
+                        height: '48px',
+                        borderRadius: '12px',
+                        background: iconBg,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                       }}>
-                        {example}
+                        <pattern.icon style={{ width: '22px', height: '22px', color: iconColor }} />
+                      </div>
+                      <DSBadge style={{
+                        background: pattern.status === "Alpha" ? '#ef4444' : pattern.status === "Beta" ? '#f59e0b' : '#10b981',
+                        color: 'white',
+                        border: 'none',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                      }}>
+                        {pattern.status}
                       </DSBadge>
-                    ))}
+                    </div>
+                    <h3 style={{ color: '#0f172a', fontSize: '1.25rem', fontWeight: 700, marginBottom: '8px' }}>
+                      {pattern.title}
+                    </h3>
+                    <p style={{
+                      color: '#475569',
+                      fontSize: '0.9rem',
+                      marginBottom: '16px',
+                      lineHeight: '1.5',
+                    }}>
+                      {pattern.description}
+                    </p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                      {pattern.examples.slice(0, 2).map((example) => (
+                        <span key={example} style={{
+                          background: '#f1f5f9',
+                          color: '#475569',
+                          fontSize: '0.75rem',
+                          padding: '4px 10px',
+                          borderRadius: '6px',
+                          border: '1px solid #e2e8f0',
+                        }}>
+                          {example}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', color: '#1d4ed8', fontWeight: 600, fontSize: '0.9rem', gap: '4px', marginTop: '24px' }}>
+                    View pattern blueprints <ArrowRight style={{ width: '16px', height: '16px', marginLeft: '4px' }} />
                   </div>
                 </div>
-              </DSCard>
-            ))}
-          </div>
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Pattern Philosophy */}
+        {/* Philosophy Section */}
         <div style={{
-          background: 'white',
-          borderRadius: designSystem.borderRadius.cards,
-          padding: designSystem.layout.spacing.xl,
-          boxShadow: designSystem.elevation.level3,
+          background: '#ffffff',
+          borderRadius: '20px',
+          border: '1px solid #e2e8f0',
+          padding: '40px',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.03)',
         }}>
-          <DSHeading2 style={{
-            fontSize: '2.25rem',
-            textAlign: 'center',
-            background: designSystem.colors.background.gradient,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            marginBottom: designSystem.layout.spacing.xl,
-            fontWeight: designSystem.typography.fontWeight.headers,
-          }}>
-            🎯 Pattern Philosophy
-          </DSHeading2>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.01em' }}>
+              Pattern Philosophy
+            </h2>
+            <p style={{ color: '#475569', fontSize: '0.95rem', maxWidth: '600px', margin: '8px auto 0' }}>
+              Core principles guiding how complex laboratory processes are organized in our frontend layouts.
+            </p>
+          </div>
 
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: designSystem.layout.spacing.lg,
-            marginBottom: designSystem.layout.spacing.xl,
+            gap: '24px',
+            marginBottom: '40px',
           }}>
-            <DSCard style={{
-              background: 'linear-gradient(135deg, #667eea, #764ba2)',
-              color: 'white',
-              border: 'none',
-            }}>
-              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.md }}>
-                🔬 Scientific Accuracy
-              </DSHeading3>
-              <DSParagraph style={{
-                color: 'rgba(255, 255, 255, 0.9)',
-                lineHeight: '1.6',
+            {[
+              { title: '🔬 Scientific Accuracy', desc: 'Layouts are structurally matched to real titration, division, and pendulum mechanics to mirror physical learning environments.' },
+              { title: '📊 Progressive Disclosure', desc: 'Complex calculations, configurations, and graphs are disclosed incrementally to prevent cognitive load in student dashboards.' },
+              { title: '⚠️ Safeguarded Boundaries', desc: 'Built-in validations, color codes, and sensor warnings instantly catch errors in titration flows or heat equations.' },
+            ].map((p, idx) => (
+              <div key={idx} style={{
+                border: '1px solid #e2e8f0',
+                borderRadius: '16px',
+                padding: '24px',
+                background: '#f8fafc',
               }}>
-                Patterns reflect real laboratory workflows and scientific methodologies to provide authentic learning
-                experiences.
-              </DSParagraph>
-            </DSCard>
-
-            <DSCard style={{
-              background: 'linear-gradient(135deg, #10b981, #48bb78)',
-              color: 'white',
-              border: 'none',
-            }}>
-              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.md }}>
-                📊 Progressive Disclosure
-              </DSHeading3>
-              <DSParagraph style={{
-                color: 'rgba(255, 255, 255, 0.9)',
-                lineHeight: '1.6',
-              }}>
-                Complex information is revealed progressively to avoid overwhelming users while maintaining access to
-                detailed data.
-              </DSParagraph>
-            </DSCard>
-
-            <DSCard style={{
-              background: 'linear-gradient(135deg, #f59e0b, #ed8936)',
-              color: 'white',
-              border: 'none',
-            }}>
-              <DSHeading3 style={{ color: 'white', fontSize: '1.3rem', marginBottom: designSystem.layout.spacing.md }}>
-                ⚠️ Error Prevention
-              </DSHeading3>
-              <DSParagraph style={{
-                color: 'rgba(255, 255, 255, 0.9)',
-                lineHeight: '1.6',
-              }}>
-                Patterns include safeguards and validation to prevent common errors in laboratory procedures.
-              </DSParagraph>
-            </DSCard>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: '8px', color: '#0f172a' }}>{p.title}</h3>
+                <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>{p.desc}</p>
+              </div>
+            ))}
           </div>
 
-          <DSCard style={{
-            background: 'linear-gradient(135deg, #8b5cf6, #a855f7)',
-            color: 'white',
-            border: 'none',
+          <div style={{
+            borderTop: '1px solid #e2e8f0',
+            paddingTop: '32px',
           }}>
-            <DSHeading3 style={{ color: 'white', fontSize: '1.5rem', marginBottom: designSystem.layout.spacing.md }}>
-              🚀 Using Patterns
-            </DSHeading3>
-            <DSParagraph style={{
-              color: 'rgba(255, 255, 255, 0.9)',
-              marginBottom: designSystem.layout.spacing.lg,
-              lineHeight: '1.6',
-            }}>
-              How to implement and customize patterns in your Virtual Labs
-            </DSParagraph>
-            
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '16px', color: '#0f172a' }}>
+              🚀 Implementing Layout Blueprints
+            </h3>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-              gap: designSystem.layout.spacing.lg,
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '24px',
             }}>
-              <div>
-                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>1. Choose the Right Pattern</div>
-                <div style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5' }}>
-                  Select patterns based on your specific laboratory type and user needs. Consider the complexity of
-                  procedures and data involved.
+              {[
+                { step: '1. Layout Type', text: 'Select sidebar control panels vs observations panel based on experiment layout preferences.' },
+                { step: '2. Custom Controls', text: 'Define the ranges for heat simulation coefficients and calibration factors.' },
+                { step: '3. Test Scenarios', text: 'Always run client tests under 768px and 1200px breakpoints to confirm responsiveness.' },
+              ].map((s, idx) => (
+                <div key={idx}>
+                  <div style={{ fontWeight: 700, color: '#1d4ed8', fontSize: '0.95rem', marginBottom: '4px' }}>{s.step}</div>
+                  <div style={{ color: '#475569', fontSize: '0.875rem', lineHeight: '1.5' }}>{s.text}</div>
                 </div>
-              </div>
-              <div>
-                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>2. Customize for Your Context</div>
-                <div style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5' }}>
-                  Adapt patterns to match your specific equipment, procedures, and educational objectives while
-                  maintaining core usability principles.
-                </div>
-              </div>
-              <div>
-                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>3. Test with Users</div>
-                <div style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5' }}>
-                  Validate patterns with actual students and instructors to ensure they support effective learning and
-                  teaching.
-                </div>
-              </div>
-              <div>
-                <div style={{ fontWeight: 'bold', marginBottom: designSystem.layout.spacing.sm }}>4. Iterate and Improve</div>
-                <div style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5' }}>
-                  Continuously refine patterns based on user feedback and learning outcomes data.
-                </div>
-              </div>
+              ))}
             </div>
-          </DSCard>
+          </div>
         </div>
+
       </div>
     </div>
   )

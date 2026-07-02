@@ -49,6 +49,28 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Virtual Labs Redesign Custom Tokens */
+    --vlabs-primary: #3182ce;
+    --vlabs-primary-light: #4299e1;
+    --vlabs-success: #10b981;
+    --vlabs-success-light: #48bb78;
+    --vlabs-warning: #f59e0b;
+    --vlabs-warning-light: #ed8936;
+    --vlabs-error: #ef4444;
+    --vlabs-error-light: #f56565;
+    --vlabs-neutral-dark: #2d3748;
+    --vlabs-neutral-medium: #64748b;
+    --vlabs-neutral-light: #f8fafc;
+    --vlabs-bg-gradient-start: #667eea;
+    --vlabs-bg-gradient-end: #764ba2;
+
+    /* Border Radius tokens */
+    --vlabs-radius-cards: 15px;
+    --vlabs-radius-components: 12px;
+    --vlabs-radius-buttons: 8px;
+    --vlabs-radius-inputs: 6px;
+    --vlabs-radius-progress: 4px;
   }
   .dark {
     --background: 0 0% 3.9%;
